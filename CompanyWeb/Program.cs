@@ -1,12 +1,17 @@
 using NuGet.Protocol.Core.Types;
-
+using CompanyWeb.Data;
+using Microsoft.EntityFrameworkCore;
+using CompanyWeb.Data.EF;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddRazorPages();
-
+builder.Services.AddDbContext<CompanyDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CompanyDb"));
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

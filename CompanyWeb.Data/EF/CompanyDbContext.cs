@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace CompanyWeb.Data.EF
 {
-    public class CompanyDbContext : IdentityDbContext
+    public class CompanyDbContext : DbContext
     {
-        public CompanyDbContext(DbContextOptions options) : base(options)
+        public CompanyDbContext(DbContextOptions<CompanyDbContext> ContectOptions) : base(ContectOptions)
         {
             //options.UseQslServer("")
         }
