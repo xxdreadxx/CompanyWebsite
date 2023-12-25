@@ -1,0 +1,14 @@
+E:\Pj\CompanyWebsite\CompanyWeb.Data\bin\Debug\net6.0\CompanyWeb.Data.deps.json
+E:\Pj\CompanyWebsite\CompanyWeb.Data\bin\Debug\net6.0\CompanyWeb.Data.runtimeconfig.json
+E:\Pj\CompanyWebsite\CompanyWeb.Data\bin\Debug\net6.0\CompanyWeb.Data.dll
+E:\Pj\CompanyWebsite\CompanyWeb.Data\bin\Debug\net6.0\CompanyWeb.Data.pdb
+E:\Pj\CompanyWebsite\CompanyWeb.Data\obj\Debug\net6.0\CompanyWeb.Data.csproj.AssemblyReference.cache
+E:\Pj\CompanyWebsite\CompanyWeb.Data\obj\Debug\net6.0\CompanyWeb.Data.GeneratedMSBuildEditorConfig.editorconfig
+E:\Pj\CompanyWebsite\CompanyWeb.Data\obj\Debug\net6.0\CompanyWeb.Data.AssemblyInfoInputs.cache
+E:\Pj\CompanyWebsite\CompanyWeb.Data\obj\Debug\net6.0\CompanyWeb.Data.AssemblyInfo.cs
+E:\Pj\CompanyWebsite\CompanyWeb.Data\obj\Debug\net6.0\CompanyWeb.Data.csproj.CoreCompileInputs.cache
+E:\Pj\CompanyWebsite\CompanyWeb.Data\obj\Debug\net6.0\CompanyWeb.Data.dll
+E:\Pj\CompanyWebsite\CompanyWeb.Data\obj\Debug\net6.0\refint\CompanyWeb.Data.dll
+E:\Pj\CompanyWebsite\CompanyWeb.Data\obj\Debug\net6.0\CompanyWeb.Data.pdb
+E:\Pj\CompanyWebsite\CompanyWeb.Data\obj\Debug\net6.0\CompanyWeb.Data.genruntimeconfig.cache
+E:\Pj\CompanyWebsite\CompanyWeb.Data\obj\Debug\net6.0\ref\CompanyWeb.Data.dll
