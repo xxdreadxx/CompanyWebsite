@@ -15,6 +15,7 @@ namespace CompanyWeb.Areas.Admin.Controllers
             _context = context;
         }
 
+        //Đéo hiểu sao đoạn này ko chạy đc
         public IActionResult Index()
         {
             return View();
