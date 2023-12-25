@@ -1,0 +1,249 @@
+﻿@using CompanyWeb.Data.Entities;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int ID = int.Parse(ViewBag.AbountId.ToString());
+    List<dEmployee> lstEmployee = ViewBag.employee;
+    sSystem sys = ViewBag.system;
+    string About = "";
+    int delay = 0;
+    if (ID == 1)
+    {
+        About = "Lịch sử hình thành";
+    }
+    else if (ID == 2)
+    {
+        About = "Giá trị cốt lõi và sứ mệnh";
+    }
+    else if (ID == 3)
+    {
+        About = "Đội ngũ nhân viên";
+    }
+    else if (ID == 4)
+    {
+        About = "Liên hệ";
+    }
+    else if (ID == 5)
+    {
+        About = "FAQ";
+    }
+}
+
+<main id="main">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('/Temps/assets/img/breadcrumbs-bg.jpg');">
+        <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+            <h2>@About</h2>
+            <ol>
+                <li><a href="index.html">Trang chủ</a></li>
+                <li>@About</li>
+            </ol>
+
+        </div>
+    </div>
+
+    @if (ID == 1)
+    {
+        <section id="about" class="about">
+            <div class="container" data-aos="fade-up">
+                <div class="row position-relative">
+                    <div class="col-lg-7 about-img" style="background-image: url(/Temps/LoGoDoiTac/logo123.jpg);"></div>
+                    <div class="col-lg-7 story-detail">
+                        <h2>Lịch sử hình thành</h2>
+                        <div class="our-story">
+                            @if (sys != null)
+                            {
+                                @Html.Raw(sys.History)
+                                @*<h4>20/4/2023</h4>
+                        <h3>Công ty chính thức được thành lập</h3>
+                        <p>Được hình thành từ 1 nhóm nhân viên giàu kinh nghiệm về nghiệp vụ, đặc biệt là mảng kế toán, tài chính.</p>
+                        <ul>
+                        <li><i class="bi bi-check-circle"></i> <span>28/9/2023 - Ký kết hợp tác với công ty cổ phần giáo dục GDC Toàn Cầu cùng phân phối phần mềm học tập Ekids.</span></li>
+                        <li><i class="bi bi-check-circle"></i> <span>10/10/2023 - Hợp tác với KrystalsTeam - Đội ngũ tư vấn, thiết kế phần mềm</span></li>
+                        <li><i class="bi bi-check-circle"></i> <span>15/8/2023 - Ký hợp tác với công ty TNHH đầu tư và tư vấn xây dựng Tín Thành Phát</span></li>
+                        </ul>
+                        <p>Chúng tôi tự tin với kiến thức và năng lực của mình, công ty có thể hỗ trợ mọi vấn đề, yêu cầu của các bạn!</p>
+                        <div class="watch-video d-flex align-items-center position-relative">
+                        <i class="bi bi-play-circle"></i>
+                        <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox stretched-link">Video giới thiệu</a>
+                        </div>*@
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+    else if (ID == 2)
+    {
+        <section id="alt-services" class="alt-services">
+            <div class="container" data-aos="fade-up">
+                <div class="row justify-content-around gy-4">
+                    <div class="col-lg-6 img-bg" style="background-image: url(/Temps/assets/img/alt-services.jpg);" data-aos="zoom-in" data-aos-delay="100"></div>
+                    <div class="col-lg-5 d-flex flex-column justify-content-center">
+                        <h3>Giá trị cốt lõi và sứ mệnh</h3>
+                        <p>Với định hướng mang đến những giá trị lớn nhất tới tay khách hàng, chúng tôi cung cấp:</p>
+                        <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="100">
+                            @if (sys != null)
+                            {
+                                @Html.Raw(sys.ValueAndMission)
+                                @*<div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="100">
+                        <i class="bi bi-easel flex-shrink-0"></i>
+                        <div>
+                        <h4><a href="" class="stretched-link">Nghiệp vụ kế toán, tài chính</a></h4>
+                        <p>Hỗ trợ các công ty, doanh nghiệp quyết toán thuế, nghiệp vụ kế toán nội bộ</p>
+                        </div>
+                        </div>
+                        <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="200">
+                        <i class="bi bi-patch-check flex-shrink-0"></i>
+                        <div>
+                        <h4><a href="" class="stretched-link">Đào tạo nội bộ</a></h4>
+                        <p>Nhận đào tạo nhân viên mới ở các lĩnh vực kế toán, thuế, tài chính, nhân sự</p>
+                        </div>
+                        </div>
+                        <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="300">
+                        <i class="bi bi-brightness-high flex-shrink-0"></i>
+                        <div>
+                        <h4><a href="" class="stretched-link">Cung cấp phần mềm</a></h4>
+                        <p>Cung cấp sản phẩm phần mềm giáo dục, tư vấn thiết kế website, phần mềm theo yêu cầu</p>
+                        </div>
+                        </div>
+                        <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="400">
+                        <i class="bi bi-brightness-high flex-shrink-0"></i>
+                        <div>
+                        <h4><a href="" class="stretched-link">Tư vấn thiết kế, thi công</a></h4>
+                        <p>Tư vấn thiết kế, lắp đặt, thi công từ phòng học đến các công trình</p>
+                        </div>
+                        </div>*@
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stats-counter" class="stats-counter section-bg">
+            <div class="container">
+                <div class="row gy-4">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stats-item d-flex align-items-center w-100 h-100">
+                            <i class="bi bi-emoji-smile color-blue flex-shrink-0"></i>
+                            <div>
+                                <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
+                                <p>Khách hàng đã phản hồi hài lòng về chất lượng</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stats-item d-flex align-items-center w-100 h-100">
+                            <i class="bi bi-journal-richtext color-orange flex-shrink-0"></i>
+                            <div>
+                                <span data-purecounter-start="0" data-purecounter-end="7" data-purecounter-duration="1" class="purecounter"></span>
+                                <p>Đơn vị liên kết hợp tác lâu dài cung cấp sản phẩm</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stats-item d-flex align-items-center w-100 h-100">
+                            <i class="bi bi-headset color-green flex-shrink-0"></i>
+                            <div>
+                                <span data-purecounter-start="0" data-purecounter-end="12" data-purecounter-duration="1" class="purecounter"></span>
+                                <p>Đơn vị đăng ký khóa đào tạo và đã hoàn thành</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stats-item d-flex align-items-center w-100 h-100">
+                            <i class="bi bi-people color-pink flex-shrink-0"></i>
+                            <div>
+                                <span data-purecounter-start="0" data-purecounter-end="294" data-purecounter-duration="1" class="purecounter"></span>
+                                <p>Khách hàng đã trải nghiệm và hài lòng về sản phẩm</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+    else if (ID == 3)
+    {
+        <section id="team" class="team">
+            <div class="container" data-aos="fade-up">
+                <div class="section-header">
+                    <h2>Đội ngũ nhân viên</h2>
+                    <p>Với lực lượng nhân viên kinh nghiệm, chúng tôi sẽ góp hết sức để cùng với các bạn đi đến thành công</p>
+                </div>
+                <div class="row gy-5">
+                    @foreach (var emp in lstEmployee)
+                    {
+                        delay = delay + 100;
+                        <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="@delay">
+                            <div class="member-img">
+                                <img src="@emp.Avatar" class="img-fluid" alt="">
+                                <div class="social">
+                                    <a href="#"><i class="bi bi-twitter"></i></a>
+                                    <a href="#"><i class="bi bi-facebook"></i></a>
+                                    <a href="#"><i class="bi bi-instagram"></i></a>
+                                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                                </div>
+                            </div>
+                            <div class="member-info text-center">
+                                <h4>@emp.Name</h4>
+                                <span>@emp.Position</span>
+                                <p>@emp.Content</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+    }
+    else if (ID == 4)
+    {
+        <section id="contact" class="contact">
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+                <div class="row gy-4">
+                    <div class="col-lg-6">
+                        <div class="info-item  d-flex flex-column justify-content-center align-items-center">
+                            <i class="bi bi-map"></i>
+                            <h3>Địa chỉ</h3>
+                            <p>Số nhà 89, ngõ 87 phố Phú Đô, Phường Phú Đô, Quận Nam Từ Liêm, TP Hà Nội</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="info-item d-flex flex-column justify-content-center align-items-center">
+                            <i class="bi bi-envelope"></i>
+                            <h3>Email</h3>
+                            <p>NHC.SATech@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="info-item  d-flex flex-column justify-content-center align-items-center">
+                            <i class="bi bi-telephone"></i>
+                            <h3>Số điện thoại liên hệ</h3>
+                            <p>0971 032 887</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row gy-4 mt-1">
+                    <div class="col-lg-12 ">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7449.2143653849!2d105.7589418198541!3d21.008377705609767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3134535c0ba9648b%3A0x16c5ea24485c1045!2zODkgTmcuIDg3IFAuIFBow7ogxJDDtCwgTeG7hSBUcsOsLCBU4burIExpw6ptLCBIw6AgTuG7mWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1695740239093!5m2!1svi!2s" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+    else if (ID == 5)
+    {
+        <section id="contact" class="contact">
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+                <div class="row gy-4">
+                    <div class="col-lg-12">
+                        <div class="info-item  d-flex flex-column justify-content-center align-items-center">
+                            <p>Chưa có dữ liệu</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+</main>

@@ -1,0 +1,273 @@
+﻿﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/temps/logodoitac/logoicon.jpg" rel="icon">
+    <link href="~/temps/logodoitac/logoicon.jpg" rel="apple-touch-icon">
+    <title>Nixon : Admin Kit</title>
+    <!-- ================= Favicon ================== -->
+    <!-- Standard -->
+    <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
+    <!-- Retina iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
+    <!-- Retina iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
+    <!-- Standard iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
+    <!-- Standard iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
+    <!-- Styles -->
+    <link href="~/tempadmin/assets/fontAwesome/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="~/tempadmin/assets/css/lib/themify-icons.css" rel="stylesheet">
+    <link href="~/tempadmin/assets/css/lib/weather-icons.css" rel="stylesheet" />
+    <link href="~/tempadmin/assets/css/lib/mmc-chat.css" rel="stylesheet" />
+    <link href="~/tempadmin/assets/css/lib/sidebar.css" rel="stylesheet">
+    <link href="~/tempadmin/assets/css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="~/tempadmin/assets/css/lib/toastr/toastr.min.css" rel="stylesheet">
+    <link href="~/tempadmin/assets/css/lib/nixon.css" rel="stylesheet">
+    <link href="~/tempadmin/assets/lib/lobipanel/css/lobipanel.min.css" rel="stylesheet">
+    <link href="~/tempadmin/assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div>
+        <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
+            <div class="nano">
+                <div class="nano-content">
+                    <ul>
+                        <li class="active">
+                            <a class="sidebar-sub-toggle"><i class="ti-home"></i> Hệ thống <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                            <ul>
+                                <li><a href="/Admin/sSystem/Index">Thông tin công ty</a></li>
+                                <li><a href="/Admin/dUser/Index">Quản lý tài khoản</a></li>
+                            </ul>
+                        </li>
+                        @* <li><a href="app-profile.html"><i class="ti-user"></i> Profile</a></li>
+                        <li><a href="app-widget-card.html"><i class="ti-layout-grid2-alt"></i> Widget</a></li> *@
+                        <li>
+                            <a class="sidebar-sub-toggle"><i class="ti-view-list-alt"></i> Danh mục <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                            <ul>
+                                <li><a href="/Admin/cCustomer/Index">Loại đơn vị liên quan</a></li>
+                                <li><a href="/Admin/cPost/Index">Loại bài đăng</a></li>
+                                <li><a href="/Admin/cProduct/Index">Loại sản phẩm</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="sidebar-sub-toggle"><i class="ti-panel"></i> Chức năng <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                            <ul>
+                                <li><a href="/Admin/dCustomer/Index">Đơn vị liên quan</a></li>
+                                <li><a href="/Admin/dProduct/Index">Sản phẩm</a></li>
+                                <li><a href="/Admin/dEmployee/Index">Nhân viên</a></li>
+                                <li><a href="/Admin/dFeedback/Index">Phản hồi</a></li>
+                                <li><a href="/Admin/dPost/Index">Bài đăng</a></li>
+                                <li><a href="/Admin/dQnA/index">QnA</a></li>
+                                <li><a href="/Admin/dRecuitment/Index">Tuyển dụng</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="app-profile.html"><i class="ti-user"></i> Báo cáo</a></li>
+                        @* <li><a target="_blank" href="https://docs.vuejsadmin.com/docs/nixon-admin/"><i class="ti-file"></i> Documentation</a></li> *@
+                        @* <li><a><i class="ti-close"></i> Logout</a></li> *@
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /# sidebar -->
+        <div class="header">
+            <div class="pull-left">
+                <div class="logo">
+                    <a href="index.html">
+                        <img id="logoImg" src="~/temps/logodoitac/logoicon.jpg" alt="Quản trị" />
+                    </a>
+                </div>
+                <div class="hamburger sidebar-toggle">
+                    <span class="ti-menu"></span>
+                </div>
+            </div>
+            <div class="pull-right p-r-15">
+                <ul>
+                    <li class="header-icon dib">
+                        <i class="ti-bell"></i>
+                        <div class="note-count">2</div>
+                        <div class="drop-down">
+                            <div class="dropdown-content-heading">
+                                <span class="text-left">Recent Notifications</span>
+                            </div>
+                            <div class="dropdown-content-body">
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <img class="pull-left m-r-10 avatar-img" src="~/tempadmin/assets/images/avatar/3.jpg" alt="" />
+                                            <div class="notification-content">
+                                                <small class="notification-timestamp pull-right">02:34 PM</small>
+                                                <div class="notification-heading">Mr. Jane</div>
+                                                <div class="notification-text">5 members joined today </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img class="pull-left m-r-10 avatar-img" src="~/tempadmin/assets/images/avatar/3.jpg" alt="" />
+                                            <div class="notification-content">
+                                                <small class="notification-timestamp pull-right">02:34 PM</small>
+                                                <div class="notification-heading">Mariam</div>
+                                                <div class="notification-text">likes a photo of you</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img class="pull-left m-r-10 avatar-img" src="~/tempadmin/assets/images/avatar/3.jpg" alt="" />
+                                            <div class="notification-content">
+                                                <small class="notification-timestamp pull-right">02:34 PM</small>
+                                                <div class="notification-heading">Tasnim</div>
+                                                <div class="notification-text">Hi Teddy, Just wanted to let you ...</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img class="pull-left m-r-10 avatar-img" src="~/tempadmin/assets/images/avatar/3.jpg" alt="" />
+                                            <div class="notification-content">
+                                                <small class="notification-timestamp pull-right">02:34 PM</small>
+                                                <div class="notification-heading">Jane Roe</div>
+                                                <div class="notification-text">Hi Teddy, Just wanted to let you ...</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="text-center">
+                                        <a href="#" class="more-link">See All</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="header-icon dib">
+                        <i class="ti-email"></i>
+                        <div class="note-count">21</div>
+                        <div class="drop-down">
+                            <div class="dropdown-content-heading">
+                                <span class="text-left">2 New Messages</span>
+                                <a href="app-email.html"><i class="ti-pencil-alt pull-right"></i></a>
+                            </div>
+                            <div class="dropdown-content-body">
+                                <ul>
+                                    <li class="notification-unread">
+                                        <a href="#">
+                                            <img class="pull-left m-r-10 avatar-img" src="~/tempadmin/assets/images/avatar/1.jpg" alt="" />
+                                            <div class="notification-content">
+                                                <small class="notification-timestamp pull-right">02:34 PM</small>
+                                                <div class="notification-heading">Jane Doe</div>
+                                                <div class="notification-text">Hi Teddy, Just wanted to let you ...</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="notification-unread">
+                                        <a href="#">
+                                            <img class="pull-left m-r-10 avatar-img" src="~/tempadmin/assets/images/avatar/2.jpg" alt="" />
+                                            <div class="notification-content">
+                                                <small class="notification-timestamp pull-right">02:34 PM</small>
+                                                <div class="notification-heading">Jane Roe</div>
+                                                <div class="notification-text">Hi Teddy, Just wanted to let you ...</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img class="pull-left m-r-10 avatar-img" src="~/tempadmin/assets/images/avatar/3.jpg" alt="" />
+                                            <div class="notification-content">
+                                                <small class="notification-timestamp pull-right">02:34 PM</small>
+                                                <div class="notification-heading">Jane Doe</div>
+                                                <div class="notification-text">Hi Teddy, Just wanted to let you ...</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img class="pull-left m-r-10 avatar-img" src="~/tempadmin/assets/images/avatar/2.jpg" alt="" />
+                                            <div class="notification-content">
+                                                <small class="notification-timestamp pull-right">02:34 PM</small>
+                                                <div class="notification-heading">Jane Roe</div>
+                                                <div class="notification-text">Hi Teddy, Just wanted to let you ...</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="text-center">
+                                        <a href="#" class="more-link">See All</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="header-icon dib chat-sidebar-icon"><i class="ti-comments"></i></li>
+                    <li class="header-icon dib">
+                        <img class="avatar-img" src="~/tempadmin/assets/images/avatar/1.jpg" alt="" /> <span class="user-avatar">Jane <i class="ti-angle-down f-s-10"></i></span>
+                        <div class="drop-down dropdown-profile">
+                            <div class="dropdown-content-heading">
+                                <span class="text-left">Upgrade Now</span>
+                                <p class="trial-day">30 Days Trail</p>
+                            </div>
+                            <div class="dropdown-content-body">
+                                <ul>
+                                    <li><a href="#"><i class="ti-user"></i> <span>Profile</span></a></li>
+                                    <li><a href="#"><i class="ti-wallet"></i> <span>My Balance</span></a></li>
+                                    <li><a href="#"><i class="ti-write"></i> <span>My Task</span></a></li>
+                                    <li><a href="#"><i class="ti-calendar"></i> <span>My Calender</span></a></li>
+                                    <li><a href="#"><i class="ti-email"></i> <span>Inbox</span></a></li>
+                                    <li><a href="#"><i class="ti-settings"></i> <span>Setting</span></a></li>
+                                    <li><a href="#"><i class="ti-help-alt"></i> <span>Help</span></a></li>
+                                    <li><a href="#"><i class="ti-lock"></i> <span>Lock Screen</span></a></li>
+                                    <li><a href="#"><i class="ti-power-off"></i> <span>Logout</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container" style="padding-top:65px">
+            @RenderBody()
+        </div>
+
+        <!-- /# content wrap -->
+        <script src="~/tempadmin/assets/js/lib/jquery.min.js"></script>
+        <!-- jquery vendor -->
+        <script src="~/tempadmin/assets/js/lib/jquery.nanoscroller.min.js"></script>
+        <!-- nano scroller -->
+        <script src="~/tempadmin/assets/js/lib/sidebar.js"></script>
+        <!-- sidebar -->
+        <script src="~/tempadmin/assets/js/lib/bootstrap.min.js"></script>
+        <!-- bootstrap -->
+        <script src="~/tempadmin/assets/js/lib/mmc-common.js"></script>
+        <script src="~/tempadmin/assets/js/lib/mmc-chat.js"></script>
+        <!--  Chart js -->
+        <script src="~/tempadmin/assets/js/lib/chart-js/Chart.bundle.js"></script>
+        <script src="~/tempadmin/assets/js/lib/chart-js/chartjs-init.js"></script>
+        <!-- // Chart js -->
+        <!--  Datamap -->
+        <script src="~/tempadmin/assets/js/lib/datamap/d3.min.js"></script>
+        <script src="~/tempadmin/assets/js/lib/datamap/topojson.js"></script>
+        <script src="~/tempadmin/assets/js/lib/datamap/datamaps.world.min.js"></script>
+        <script src="~/tempadmin/assets/js/lib/datamap/datamap-init.js"></script>
+        <script src="~/tempadmin/assets/lib/lobipanel/js/lobipanel.js"></script>
+        <!-- // Datamap -->
+        <script src="~/tempadmin/assets/js/lib/toastr/toastr.min.js"></script><!-- scripit init-->
+        <script src="~/tempadmin/assets/js/lib/toastr/toastr.init.js"></script><!-- scripit init-->
+        <script src="~/tempadmin/assets/js/scripts.js"></script>
+        <!-- scripit init-->
+        <script>
+            $(document).ready(function () {
+                $('#lobipanel-custom-control').lobiPanel({
+                    reload: false,
+                    close: false,
+                    editTitle: false
+                });
+            });
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,234 @@
+﻿@using CompanyWeb.Data.Entities;
+@{
+    List<cPost> lstCategoryPosts = ViewBag.categoryPosts;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Công ty TNHH tư vấn và phát triển công nghệ NHC</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <link href="~/temps/logodoitac/logoicon.jpg" rel="icon">
+    <link href="~/temps/logodoitac/logoicon.jpg" rel="apple-touch-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <link href="/Temps/assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="/Temps/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/Temps/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="/Temps/assets/vendor/fontawesome-free/css/all.css" rel="stylesheet" />
+    <link href="/Temps/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="/Temps/assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link href="/Temps/assets/vendor/glightbox/css/glightbox.css" rel="stylesheet" />
+    <link href="/Temps/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+    <link href="/Temps/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    <link href="/Temps/assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <header id="header" class="header d-flex align-items-center">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+            <a href="/home/index" class="logo d-flex align-items-center">
+                @*<h1>UpConstruction<span>.</span></h1>*@
+                <img src="~/temps/logodoitac/logoIcon_New.png" />
+            </a>
+            <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+            <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a href="/Home/Index" class="active">Trang chủ</a></li>
+                    <li class="dropdown">
+                        <a href="#"><span>Về chúng tôi</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                        <ul>
+                            <li><a href="/About/Index/1">Lịch sử hình thành</a></li>
+                            <li><a href="/About/Index/2">Giá trị cốt lõi và sứ mệnh</a></li>
+                            <li><a href="/About/Index/3">Sơ đồ tổ chức</a></li>
+                            <li><a href="/About/Index/5">FAQ</a></li>
+                        </ul>
+                    </li>
+                    @* <li class="dropdown">
+                    <a href="#"><span>Sản phẩm cung cấp</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                    <ul>
+                    <li><a href="#">Dịch vụ kế toán trọn gói</a></li>
+                    <li><a href="#">Khóa đào tạo kế toán</a></li>
+                    <li><a href="#">Phần mềm & công cụ</a></li>
+                    <li><a href="#">Tư vấn thiết kế</a></li>
+                    </ul>
+                    </li> *@
+                    <li><a href="/Product/Index">Sản phẩm cung cấp</a></li>
+                    <li class="dropdown">
+                        <a href="#"><span>Bài viết</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                        <ul>
+                            @foreach (var category in lstCategoryPosts)
+                            {
+                                <li><a href="/Posts/Index/@category.ID">@category.Title</a></li>
+                            }
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#"><span>Đơn vị liên kết</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                        <ul>
+                            <li><a href="#">Đơn vị hợp tác</a></li>
+                            <li><a href="#">Khách hàng tin dùng</a></li>
+                            <li><a href="#">Cảm nhận & phản hồi của người dùng</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#"><span>Tuyển dụng</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                        <ul>
+                            <li><a href="#">Điều kiện & quyền lợi</a></li>
+                            <li><a href="#">Quy trình ứng tuyển</a></li>
+                            <li><a href="#">Thông tin tuyển dụng</a></li>
+                        </ul>
+                    </li>
+                    @*
+                    <li class="dropdown">
+                    <a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                    <ul>
+                    <li><a href="#">Dropdown 1</a></li>
+                    <li class="dropdown">
+                    <a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                    <ul>
+                    <li><a href="#">Deep Dropdown 1</a></li>
+                    <li><a href="#">Deep Dropdown 2</a></li>
+                    <li><a href="#">Deep Dropdown 3</a></li>
+                    <li><a href="#">Deep Dropdown 4</a></li>
+                    <li><a href="#">Deep Dropdown 5</a></li>
+                    </ul>
+                    </li>
+                    <li><a href="#">Dropdown 2</a></li>
+                    <li><a href="#">Dropdown 3</a></li>
+                    <li><a href="#">Dropdown 4</a></li>
+                    </ul>
+                    </li>*@
+                    <li><a href="/About/Index/4">Liên hệ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    @RenderBody()
+    <footer id="footer" class="footer">
+        <div class="footer-content position-relative">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-info">
+                            <h3>Công ty TNHH tư vấn và phát triển công nghệ NHC</h3>
+                            <p>
+                                Số nhà 89, ngõ 87 phố Phú Đô, Phường Phú Đô,<br>
+                                Quận Nam Từ Liêm, Hà Nội, Việt Nam<br><br>
+                                <strong>Số điện thoại:</strong> 0971 032 887<br>
+                                <strong>Email:</strong> NHC.SATech@gmail.com<br>
+                            </p>
+                            <div class="social-links d-flex mt-3">
+                                <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-twitter"></i></a>
+                                <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-facebook"></i></a>
+                                <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Về chúng tôi</h4>
+                        <ul>
+                            <li><a href="#">Trang chủ</a></li>
+                            <li><a href="#">Lịch sử hình thành</a></li>
+                            <li><a href="#">Giá trị cốt lõi</a></li>
+                            <li><a href="#">Bản đồ chỉ đường</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Dịch vụ cung cấp</h4>
+                        <ul>
+                            <li><a href="#">Dịch vụ kế toán</a></li>
+                            <li><a href="#">Đào tạo nghiệp vụ</a></li>
+                            <li><a href="#">Phần mềm & công cụ</a></li>
+                            <li><a href="#">Tư vấn thiết kế</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Đơn vị liên kết</h4>
+                        <ul>
+                            <li><a href="#">Đơn vị hợp tác</a></li>
+                            <li><a href="#">Khách hàng</a></li>
+                            <li><a href="#">Phản hồi của người dùng</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Tuyển dụng</h4>
+                        <ul>
+                            <li><a href="#">Điều kiện & quyền lợi</a></li>
+                            <li><a href="#">Quy trình tuyển dụng</a></li>
+                            <li><a href="#">Thông tin tuyển dụng</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-legal text-center position-relative">
+            <div class="container">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>NHC</span></strong>. All Rights Reserved
+                </div>
+                <div class="credits">
+                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>-<a>KrystalsTeam</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <div id="preloader"></div>
+    @* <script src="/Temps/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> *@
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/Temps/assets/vendor/aos/aos.js"></script>
+    <script src="/Temps/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="/Temps/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/Temps/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="/Temps/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="/Temps/assets/vendor/php-email-form/validate.js"></script>
+    <script src="/Temps/assets/js/main.js"></script>
+    <script>
+        function SendMail() {
+            var Name = $('#txtName').val();
+            var Email = $('#txtEmail').val();
+            var Sdt = $('#txtSdt').val();
+            var Content = $('#txtContent').val();
+            var noidung = "Tên khách hàng: " + Name + "-- Email: " + Email + "-- SĐT: " + Sdt + "-- Nội dung: " + Content;
+            $.ajax({
+                async: false,
+                url: 'Home/SendEmail',
+                data: {
+                    str: noidung
+                },
+                dataType: "json",
+                type: 'GET',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    if (res.status == true) {
+                        // toastr.error(res.mess, 'Thông báo!', 5000);
+                        alert('Gửi thông tin thành công');
+                        setTimeout(function () {
+                            location.url = '/Home/Index';
+                        }, 1000);
+                    } else {
+                        alert("Cannot add to list !");
+                    }
+                },
+                error: function () {
+                    // toastr.error('Có lỗi xảy ra, vui lòng thử lại sau', 'Lỗi!', 5000);
+                    alert('Có lỗi xảy ra, vui lòng thử lại sau');
+                }
+            });
+        }
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

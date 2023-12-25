@@ -1,0 +1,149 @@
+﻿﻿
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nixon : Widget</title>
+    <!-- Standard -->
+    <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
+    <!-- Retina iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
+    <!-- Retina iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
+    <!-- Standard iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
+    <!-- Standard iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
+
+    <!-- Styles -->
+    <link href="~/tempadmin/assets/fontAwesome/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="~/tempadmin/assets/css/lib/themify-icons.css" rel="stylesheet">
+    <link href="~/tempadmin/assets/css/lib/weather-icons.css" rel="stylesheet" />
+    <link href="~/tempadmin/assets/css/lib/mmc-chat.css" rel="stylesheet" />
+    <link href="~/tempadmin/assets/css/lib/sidebar.css" rel="stylesheet">
+    <link href="~/tempadmin/assets/css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="~/tempadmin/assets/css/lib/toastr/toastr.min.css" rel="stylesheet">
+    <link href="~/tempadmin/assets/css/lib/nixon.css" rel="stylesheet">
+    <link href="~/tempadmin/assets/lib/lobipanel/css/lobipanel.min.css" rel="stylesheet">
+    <link href="~/tempadmin/assets/css/style.css" rel="stylesheet">
+</head>
+
+<body class="bg-primary">
+    <div class="Nixon-login">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="login-content">
+                        <div class="login-logo">
+                            <a href="index.html"><span>Đăng nhập</span></a>
+                        </div>
+                        <div class="login-form">
+                            <form>
+                                <div class="form-group">
+                                    <label>Tên đăng nhập</label>
+                                    <input type="email" id="txtUserName" class="form-control" placeholder="Tên đăng nhập">
+                                </div>
+                                <div class="form-group">
+                                    <label>Mật khẩu</label>
+                                    <input type="password" id="txtPass" class="form-control" placeholder="Mật khẩu">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Remember Me
+                                    </label>
+                                    <label class="pull-right">
+                                        <a href="page-reset-password.html">Forgotten Password?</a>
+                                    </label>
+                                </div>
+                                <a class="btn btn-primary btn-flat m-b-30 m-t-30" onclick="Login()">Đăng nhập</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script src="~/tempadmin/assets/js/lib/jquery.min.js"></script>
+<!-- jquery vendor -->
+<script src="~/tempadmin/assets/js/lib/jquery.nanoscroller.min.js"></script>
+<!-- nano scroller -->
+<script src="~/tempadmin/assets/js/lib/sidebar.js"></script>
+<!-- sidebar -->
+<script src="~/tempadmin/assets/js/lib/bootstrap.min.js"></script>
+<!-- bootstrap -->
+<script src="~/tempadmin/assets/js/lib/mmc-common.js"></script>
+<script src="~/tempadmin/assets/js/lib/mmc-chat.js"></script>
+<!--  Chart js -->
+<script src="~/tempadmin/assets/js/lib/chart-js/Chart.bundle.js"></script>
+<script src="~/tempadmin/assets/js/lib/chart-js/chartjs-init.js"></script>
+<!-- // Chart js -->
+<!--  Datamap -->
+<script src="~/tempadmin/assets/js/lib/datamap/d3.min.js"></script>
+<script src="~/tempadmin/assets/js/lib/datamap/topojson.js"></script>
+<script src="~/tempadmin/assets/js/lib/datamap/datamaps.world.min.js"></script>
+<script src="~/tempadmin/assets/js/lib/datamap/datamap-init.js"></script>
+<script src="~/tempadmin/assets/lib/lobipanel/js/lobipanel.js"></script>
+<!-- // Datamap -->
+<script src="~/tempadmin/assets/js/lib/toastr/toastr.min.js"></script><!-- scripit init-->
+<script src="~/tempadmin/assets/js/lib/toastr/toastr.init.js"></script><!-- scripit init-->
+<script src="~/tempadmin/assets/js/scripts.js"></script>
+
+<script>
+    function Login() {
+        var username = $('#txtUserName').val();
+        var password = $('#txtPass').val();
+        if (username == '' || password == '') {
+            toastr.error('Chưa nhập username hoặc pasword!', 'Thông báo', {
+                "positionClass": "toast-top-right",
+                timeOut: 5000,
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "preventDuplicates": true,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut",
+                "tapToDismiss": false
+            })
+        }
+        else {
+            $.ajax({
+                async: false,
+                url: '/Admin/Login/DangNhap',
+                data: {
+                    username: username,
+                    password: password
+                },
+                // dataType: "json",
+                type: 'POST',
+                cache: false,
+                // contentType: false,
+                // processData: false,
+                success: function (res) {
+                    if (res.status == true) {
+                        toastr.success(res.mess, 'Thông báo!', 5000);
+                        setTimeout(function () {
+                            location.href = '/Admin/AdHome/Index';
+                        }, 1000);
+                    } else {
+                        alert("Cannot add to list !");
+                    }
+                },
+                error: function () {
+                    toastr.error('Có lỗi xảy ra, vui lòng thử lại sau', 'Lỗi!', 5000);
+                }
+            })
+        }
+
+    }
+</script>

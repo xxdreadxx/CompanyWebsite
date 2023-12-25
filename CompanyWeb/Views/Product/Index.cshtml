@@ -1,0 +1,63 @@
+﻿@using CompanyWeb.Data.Entities;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<cProduct> lstCategory = ViewBag.category;
+    List<dProduct> lstProducts = ViewBag.products;
+    string filter = "";
+}
+<style>
+    .portfolio-content img {
+        width: 416px;
+        height: 312px
+    }
+</style>
+
+<main id="main">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('/Temps/assets/img/breadcrumbs-bg.jpg');">
+        <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+            <h2>Sản phẩm</h2>
+            <ol>
+                <li><a href="/">Trang chủ</a></li>
+                <li>Sản phẩm</li>
+            </ol>
+        </div>
+    </div>
+
+    <section id="projects" class="projects">
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+                <h2>Sản phẩm, dịch vụ cung cấp</h2>
+                <p>Các sản phẩm, công cụ, dịch vụ được công ty chúng tôi phát triển hoặc liên kết triển khai sử dụng.</p>
+            </div>
+            <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order">
+                <ul class="portfolio-flters" data-aos="fade-up" data-aos-delay="100">
+                    <li data-filter="*" class="filter-active">Tất cả</li>
+                    @foreach (var ctgr in lstCategory)
+                    {
+                        filter = "category_" + ctgr.ID;
+                        <li data-filter=".@filter">@ctgr.Title</li>
+                    }
+                </ul>
+
+                <div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="200">
+                    @foreach (var prd in lstProducts)
+                    {
+                        filter = "category_" + prd.ID_CProduct;
+                        <div class="col-lg-4 col-md-6 portfolio-item @filter">
+                            <div class="portfolio-content h-100">
+                                <img src="@prd.Thumbnail" class="img-fluid" alt="">
+                                <div class="portfolio-info">
+                                    <h4>@prd.Title</h4>
+                                    <p>@prd.Description</p>
+                                    <a href="@prd.Image" title="@prd.Title" data-gallery="portfolio-gallery-remodeling" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                    <a href="/Product/Details/1" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

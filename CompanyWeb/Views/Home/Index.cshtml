@@ -1,0 +1,391 @@
+﻿@using CompanyWeb.Data.Entities;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<dProduct> lstProduct = ViewBag.newProduct;
+    List<dProduct> oneProduct = ViewBag.productStatic;
+    List<dCustomer> lstCustomer = ViewBag.customer;
+    List<dFeedback> lstFeedBacks = ViewBag.feedBack;
+    List<dPost> lstPosts = ViewBag.posts;
+    int delay = 0;
+    int tabView = 0;
+}
+<style>
+    .portfolio-content img {
+        width: 416px;
+        height: 312px
+    }
+</style>
+
+<section id="hero" class="hero">
+    <div class="info d-flex align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12 text-center">
+                    <h2 data-aos="fade-down">Chào mừng đến với <br /><span>Công ty TNHH tư vấn và phát triển công nghệ NHC</span></h2>
+                    <p data-aos="fade-up">Chúng tôi cung cấp dịch vụ về nghiệp vụ kế toán, thuế, tài chính doanh nghiệp; <br />phần mềm và hệ thống kèm theo từ nhưng đơn vị uy tín trong ngành;<br /> dịch vụ đào tạo kế toán uy tín, chuyên nghiệp!</p>
+                    <a data-aos="fade-up" data-aos-delay="200" href="#get-started" class="btn-get-started">Tham quan</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-item active" style="background-image: url(/Temps/assets/img/projects/construction-3.jpg)"></div>
+        <div class="carousel-item" style="background-image: url(/Temps/assets/img/projects/Nganh-QTDN-1.jpg)"></div>
+        <div class="carousel-item" style="background-image: url(/Temps/assets/img/projects/1360373137.png)"></div>
+        <div class="carousel-item" style="background-image: url(/Temps/assets/img/projects/financial-management-1592796843589128132433-1700x850.jpg)"></div>
+        <div class="carousel-item" style="background-image: url(/Temps/assets/img/projects/SMART-Classroom-1024x617.jpg)"></div>
+        <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+        </a>
+        <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+        </a>
+    </div>
+</section>
+
+<main role="main" class="pb-3">
+    <section id="get-started" class="get-started section-bg">
+        <div class="container">
+            <div class="row justify-content-between gy-4">
+                <div class="col-lg-6 d-flex align-items-center" data-aos="fade-up">
+                    <div class="content">
+                        <h3>Đăng ký tư vấn dịch vụ của công ty </h3>
+                        <p>Để lại thông tin liên lạc và nội dung cần tư vấn. Chúng tôi sẽ cử nhân viên liên hệ ngay đến bạn.
+                        <p>Phục vụ mọi lúc, tư vấn hỗ trợ 24/7. Đảm bảo quý khách sẽ hài lòng với thái độ chuyên nghiệp và tận tình của chúng tôi!</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-5" data-aos="fade">
+                    <div class="php-email-form">
+                        <h3>Thông tin liên lạc</h3>
+                        @*<p>Vel nobis odio laboriosam et hic voluptatem. Inventore vitae totam. Rerum repellendus enim linead sero park flows.</p>*@
+                        <div class="row gy-3">
+                            <div class="col-md-12">
+                                <input type="text" id="txtName" name="name" class="form-control" placeholder="Họ tên/ Tên công ty" required>
+                            </div>
+                            <div class="col-md-12 ">
+                                <input type="email" id="txtEmail" class="form-control" name="email" placeholder="Email" required>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="text" id="txtSdt" class="form-control" name="phone" placeholder="Số điện thoại" required>
+                            </div>
+                            <div class="col-md-12">
+                                <textarea class="form-control" id="txtContent" name="message" rows="6" placeholder="Nội dung cần tư vấn/ hỗ trợ" required></textarea>
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <input type="button" class="btn btn-warning" id="btnSendMail" value="Gửi thông tin" onclick="SendMail()" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @*Dịch vụ kế toán*@
+    <section id="constructions" class="constructions">
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+                <h2>Dịch vụ kế toán-thuế</h2>
+                <p>Cung cấp các dịch vụ về kế toán, thuế, quyết toán, báo cáo tài chính, ...</p>
+            </div>
+            <div class="row gy-4">
+                @foreach (var prd in oneProduct)
+                {
+                    delay = delay + 100;
+                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="@delay">
+                        <div class="card-item">
+                            <div class="row">
+                                <div class="col-xl-5">
+                                    <div class="card-bg" style="background-image: url(@prd.Thumbnail);"></div>
+                                </div>
+                                <div class="col-xl-7 d-flex align-items-center">
+                                    <div class="card-body">
+                                        <h4 class="card-title">@prd.Title</h4>
+                                        <p>@prd.Description</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    @*Phần mềm triển khai*@
+    <section id="alt-services" class="alt-services">
+        <div class="container" data-aos="fade-up">
+            <div class="row justify-content-around gy-4">
+                <div class="col-lg-6 img-bg" style="background-image: url(/Temps/assets/img/mamnondihoc-8-1589178605-9341-1591080803.jpg);" data-aos="zoom-in" data-aos-delay="100"></div>
+                <div class="col-lg-5 d-flex flex-column justify-content-center">
+                    <h3>Sản phẩm nổi bật - Phần mềm Ekids</h3>
+                    <p>Phần mềm học tập cho trẻ từ mầm non tới tiểu học</p>
+                    <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="100">
+                        <i class="bi bi-award-fill flex-shrink-0"></i>
+                        <div>
+                            <h4><a href="" class="stretched-link">Bài giảng theo chuẩn</a></h4>
+                            <p>Hệ thống bài giảng gồm lý thuyết & thực hành, dựa theo PPCT của tất cả các bộ sách đã được cấp phép.</p>
+                        </div>
+                    </div>
+                    <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="200">
+                        <i class="bi bi-browser-edge flex-shrink-0"></i>
+                        <div>
+                            <h4><a href="" class="stretched-link">Công nghệ hiện đại</a></h4>
+                            <p>Áp dụng công nghệ thực tế ảo (VR) và thực tế tăng cường (AR) trong giảng dạy lý thuyết & thực hành.</p>
+                        </div>
+                    </div>
+                    <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="300">
+                        <i class="bi bi-person-walking flex-shrink-0"></i>
+                        <div>
+                            <h4><a href="" class="stretched-link">Kết hợp vận động với học tập</a></h4>
+                            <p>Học sinh được học kết hợp giữa vận động thể chất và thiết bị dựa trên công nghệ nhận diện chuyển động.</p>
+                        </div>
+                    </div>
+                    <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="400">
+                        <i class="bi bi-list-check flex-shrink-0"></i>
+                        <div>
+                            <h4><a href="" class="stretched-link">Báo cáo học tập theo từng kỹ năng</a></h4>
+                            <p>Theo dõi chính xác năng lực học theo từng kỹ năng của từng môn học và đưa ra gợi ý để học sinh cải thiện</p>
+                        </div>
+                    </div>
+                    <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="400">
+                        <i class="bi bi-robot flex-shrink-0"></i>
+                        <div>
+                            <h4><a href="" class="stretched-link">Công nghệ iSpeak cải thiện phát âm</a></h4>
+                            <p>Thực hành phát âm và hội thoại giúp trẻ cải thiện kỹ năng nói qua ứng dụng công nghệ nhận dạng giọng nói iSpeak.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @*Sản phẩm, dịch vụ*@
+    <section id="projects" class="projects">
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+                <h2>Sản phẩm, dịch vụ cung cấp</h2>
+                <p>Các sản phẩm, công cụ, dịch vụ được công ty chúng tôi phát triển hoặc liên kết triển khai sử dụng.</p>
+            </div>
+            <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order">
+                <div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="200">
+
+                    @foreach (var product in lstProduct)
+                    {
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-roomHard">
+                            <div class="portfolio-content h-100">
+                                <img src="@product.Thumbnail" class="img-fluid" alt="">
+                                <div class="portfolio-info">
+                                    <h4>@product.Title</h4>
+                                    <p></p>
+                                    <a href="@product.Image" title="Construction 1" data-gallery="portfolio-gallery-construction" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                    <a href="project-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @*Doanh nghiệp liên kết*@
+    <section id="features" class="features section-bg">
+        <div class="section-header">
+            <h2>Đơn vị hợp tác</h2>
+            <p>Các doanh nghiệp, công ty tin tưởng và hợp tác với chúng tôi để quảng bá sản phẩm, dịch vụ</p>
+        </div>
+        <div class="container" data-aos="fade-up">
+            <ul class="nav nav-tabs row  g-2 d-flex">
+                @foreach (var cus in lstCustomer)
+                {
+                    tabView = tabView + 1;
+                    <li class="nav-item col-3">
+                        <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#tab-@tabView">
+                            <h4>@cus.Title</h4>
+                        </a>
+                    </li>
+                }
+            </ul>
+            <div class="tab-content">
+                @foreach (var content in lstCustomer)
+                {
+                    tabView = tabView + 1;
+                    delay = delay + 100;
+                    if (tabView == 1)
+                    {
+                        <div class="tab-pane active show" id="tab-@tabView">
+                            <div class="row">
+                                <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="@delay">
+                                    <h3>@content.Title</h3>
+                                    <p class="fst-italic">
+                                        @Html.Raw(content.Content)
+                                    </p>
+                                    @*<ul>
+                            <li><i class="bi bi-check2-all"></i> Phần mềm học tập Ekids</li>
+                            </ul>*@
+                                </div>
+                                <div class="col-lg-6 order-1 order-lg-2 text-center" data-aos="fade-up" data-aos-delay="200">
+                                    <img src="@content.Avatar" alt="" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="tab-pane" id="tab-@tabView">
+                            <div class="row">
+                                <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
+                                    <h3>@content.Title</h3>
+                                    <p class="fst-italic">
+                                        @Html.Raw(content.Content)
+                                    </p>
+                                    @*<ul>
+                            <li><i class="bi bi-check2-all"></i> Lắp đặt hệ thống máy tính, máy chiếu, thiết bị phòng học</li>
+                            <li><i class="bi bi-check2-all"></i> Sử chữa, bảo hành máy tính, linh kiện máy tính</li>
+                            <li><i class="bi bi-check2-all"></i> Hướng dẫn sử dụng phần mềm, hỗ trợ sử dụng phần mềm</li>
+                            </ul>*@
+                                </div>
+                                <div class="col-lg-6 order-1 order-lg-2 text-center">
+                                    <img src="@content.Avatar" alt="" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </section>
+
+    @*Phản hồi của khách hàng*@
+    <section id="testimonials" class="testimonials section-bg">
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+                <h2>Phản hồi từ khách hàng</h2>
+                <p>Những sự quan tâm, đánh giá của quý khách là nguồn động lực to lớn để chúng tôi tiếp tục phục vụ và phát triển trong tương lai</p>
+            </div>
+
+            <div class="slides-2 swiper">
+                <div class="swiper-wrapper">
+                    @foreach (var feed in lstFeedBacks)
+                    {
+                        <div class="swiper-slide">
+                            <div class="testimonial-wrap">
+                                <div class="testimonial-item">
+                                    <h3>@feed.Name</h3>
+                                    <h4>@feed.Company</h4>
+                                    <div class="stars">
+                                        @switch (feed.Star)
+                                        {
+                                            case 1:
+                                                <i class="bi bi-star-fill"></i>
+
+                                                <i class="bi bi-star"></i>
+
+                                                <i class="bi bi-star"></i>
+
+                                                <i class="bi bi-star"></i>
+
+                                                <i class="bi bi-star"></i>
+                                                break;
+                                            case 2:
+                                                <i class="bi bi-star-fill"></i>
+
+                                                <i class="bi bi-star-fill"></i>
+
+                                                <i class="bi bi-star"></i>
+
+                                                <i class="bi bi-star"></i>
+
+                                                <i class="bi bi-star"></i>
+                                                break;
+                                            case 3:
+                                                <i class="bi bi-star-fill"></i>
+
+                                                <i class="bi bi-star-fill"></i>
+
+                                                <i class="bi bi-star-fill"></i>
+
+                                                <i class="bi bi-star"></i>
+
+                                                <i class="bi bi-star"></i>
+                                                break;
+                                            case 4:
+                                                <i class="bi bi-star-fill"></i>
+
+                                                <i class="bi bi-star-fill"></i>
+
+                                                <i class="bi bi-star-fill"></i>
+
+                                                <i class="bi bi-star-fill"></i>
+
+                                                <i class="bi bi-star"></i>
+                                                break;
+                                            default:
+                                                <i class="bi bi-star-fill"></i>
+
+                                                <i class="bi bi-star-fill"></i>
+
+                                                <i class="bi bi-star-fill"></i>
+
+                                                <i class="bi bi-star-fill"></i>
+
+                                                <i class="bi bi-star-fill"></i>
+                                                break;
+                                        }
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        @feed.Content
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    @*Tin tức, bài viết*@
+    <section id="recent-blog-posts" class="recent-blog-posts">
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+                <h2>Bài đăng, tin tức</h2>
+                <p>Từ thủ thuật nghiệp vụ, cách sử dụng phần mềm, tin tức trong ngành đến tin trong nước, quốc tế.</p>
+            </div>
+            <div class="row gy-5">
+                @foreach (var posts in lstPosts)
+                {
+                    delay = delay + 100;
+                    <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="@delay">
+                        <div class="post-item position-relative h-100">
+                            <div class="post-img position-relative overflow-hidden">
+                                <img src="@posts.Thumbnail" class="img-fluid" alt="">
+                                <span class="post-date">@posts.CreatedDate</span>
+                            </div>
+                            <div class="post-content d-flex flex-column">
+                                <h3 class="post-title">@posts.Title</h3>
+                                @*<div class="meta d-flex align-items-center">
+                            <div class="d-flex align-items-center">
+                            <i class="bi bi-person"></i> <span class="ps-2">@posts.c</span>
+                            </div>
+                            <span class="px-3 text-black-50">/</span>
+                            <div class="d-flex align-items-center">
+                            <i class="bi bi-folder2"></i> <span class="ps-2">Kế toán trưởng</span>
+                            </div>
+                            </div>*@
+                                <hr>
+                                <a href="blog-details.html" class="readmore stretched-link"><span>Đọc tiếp</span><i class="bi bi-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</main>
