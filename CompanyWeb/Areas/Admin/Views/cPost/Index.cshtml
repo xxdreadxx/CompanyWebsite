@@ -1,0 +1,253 @@
+﻿@using CompanyWeb.Data.Entities;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<cPost> lstData = ViewBag.lstData;
+    int i = 0;
+}
+<style>
+    .modal-dialog {
+        top: 20%;
+        width: 50%
+    }
+</style>
+
+<a class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5" onclick="AddItem()"><i class="ti ti-plus"></i>Thêm mới</a>
+
+<div class="card alert">
+    <div class="card-header">
+        <h4>Quản lý phân loại bài viết </h4>
+    </div>
+    <div class="card-body">
+        <table class="table table-responsive table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Tên phân loại</th>
+                    <th>Trạng thái hiển thị</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in lstData)
+                {
+                    i++;
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td>@item.Title</td>
+                        @if (item.Status == 1)
+                        {
+                            <td><span class="badge badge-primary">Đang sử dụng</span></td>
+                        }
+                        else
+                        {
+                            <td><span class="badge badge-default">Dừng sử dụng</span></td>
+                        }
+                        <td class="color-primary">
+                            <a class="badge label-default" onclick="EditItem(@item.ID)"><i class="ti-pencil-alt2"></i></a> &nbsp;
+                            <a class="badge label-danger" onclick="DelItem(@item.ID, 10)"><i class="ti-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="mdAoEItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="lbName">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type="hidden" id="hdID" />
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Loại bài viết:</label>
+                        <input type="text" class="form-control" id="txtTitle">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Trạng thái sử dụng:</label>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="checkUse"> Sử dụng
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <a class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5" onclick="SaveData()"><i class="ti ti-save"></i>Thêm mới</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        function AddItem() {
+            $('#mdAoEItem').modal('show');
+            $('#txtTitle').val('');
+            $('#hdID').val('0');
+            $('#checkUse').prop('checked', true);
+            $('#lbName').text('Thêm mới bản ghi');
+        }
+        function EditItem(ID) {
+            $('#mdAoEItem').modal('show');
+            $('#lbName').text('Chỉnh sửa bản ghi');
+            $.ajax({
+                async: false,
+                url: '/Admin/cPost/GetDetail',
+                data: { ID: ID },
+                // dataType: "json",
+                type: 'GET',
+                cache: false,
+                // contentType: false,
+                // processData: false,
+                success: function (res) {
+                    if (res.status == true) {
+                        $('#txtTitle').val(res.data1.title);
+                        $('#hdID').val(ID);
+                        if (res.data1.status == 1) {
+                            $('#checkUse').prop('checked', true);
+                        }
+                        else {
+                            $('#checkUse').prop('checked', false);
+                        }
+                    } else {
+                        toastr.error(res.mess, 'Lỗi!', 5000);
+                    }
+                },
+                error: function () {
+                    toastr.error('Có lỗi xảy ra, vui lòng thử lại sau', 'Lỗi!', 5000);
+                }
+            })
+        }
+
+        function SaveData() {
+            var title = $('#txtTitle').val();
+            var ID = $('#hdID').val();
+            var status = $('#checkUse').prop("checked") ? 1 : 0;
+            if (title == '') {
+                toastr.error('Chưa nhập tên loại bài viết!', 'Thông báo', {
+                    "positionClass": "toast-top-right",
+                    timeOut: 5000,
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut",
+                    "tapToDismiss": false
+                });
+                return false;
+            }
+            var formD = new FormData();
+            formD.append('ID', ID);
+            formD.append('Title', title);
+            formD.append('Status', status);
+            $.ajax({
+                async: false,
+                url: '/Admin/cPost/SaveData',
+                data: formD,
+                // dataType: "json",
+                type: 'POST',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    if (res.status == true) {
+                        toastr.success(res.mess, 'Thông báo', {
+                            "positionClass": "toast-top-right",
+                            timeOut: 5000,
+                            "closeButton": true,
+                            "debug": false,
+                            "newestOnTop": true,
+                            "progressBar": true,
+                            "preventDuplicates": true,
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut",
+                            "tapToDismiss": false
+                        });
+                        setTimeout(function () {
+                            location.href = '/Admin/cPost/Index';
+                        }, 1000);
+                    } else {
+                        toastr.error(res.mess, 'Lỗi!', 5000);
+                    }
+                },
+                error: function () {
+                    toastr.error('Có lỗi xảy ra, vui lòng thử lại sau', 'Lỗi!', 5000);
+                }
+            });
+        }
+
+        function DelItem(ID, sta) {
+            $.ajax({
+                async: false,
+                url: '/Admin/cPost/ChangeStatus',
+                data: { ID: ID,
+                    Status: sta
+                },
+                // dataType: "json",
+                type: 'POST',
+                cache: false,
+                // contentType: false,
+                // processData: false,
+                success: function (res) {
+                    if (res.status == true) {
+                        if (res.data.Status == true) {
+                            toastr.success(res.mess, 'Thông báo', {
+                                "positionClass": "toast-top-right",
+                                timeOut: 5000,
+                                "closeButton": true,
+                                "debug": false,
+                                "newestOnTop": true,
+                                "progressBar": true,
+                                "preventDuplicates": true,
+                                "onclick": null,
+                                "showDuration": "300",
+                                "hideDuration": "1000",
+                                "extendedTimeOut": "1000",
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut",
+                                "tapToDismiss": false
+                            });
+                            setTimeout(function () {
+                                location.href = '/Admin/cPost/Index';
+                            }, 1000);
+                        }
+                        else {
+                            toastr.error(res.mess, 'Lỗi!', 5000);
+                        }
+                    } else {
+                        toastr.error(res.mess, 'Lỗi!', 5000);
+                    }
+                },
+                error: function () {
+                    toastr.error('Có lỗi xảy ra, vui lòng thử lại sau', 'Lỗi!', 5000);
+                }
+            })
+        }
+    </script>
+}

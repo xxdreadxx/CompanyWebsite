@@ -33,6 +33,7 @@ namespace CompanyWeb.Data.Dao.Admin
             {
                 _context.cPosts.Add(item);
                 _context.SaveChanges();
+                mess = "Thêm mới thành công";
             }
             catch (Exception ex)
             {
@@ -53,6 +54,7 @@ namespace CompanyWeb.Data.Dao.Admin
                 try
                 {
                     _context.SaveChanges();
+                    mess = "Cập nhật thành công";
                 }
                 catch (Exception ex)
                 {
