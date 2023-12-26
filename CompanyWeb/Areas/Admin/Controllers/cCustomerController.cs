@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CompanyWeb.Data.Dao.Admin;
+using CompanyWeb.Data.EF;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +12,14 @@ namespace CompanyWeb.Areas.Admin.Controllers
     public class cCustomerController : Controller
     {
         private readonly CompanyDbContext _context;
-        public sSystemController(CompanyDbContext context)
+        public cCustomerController(CompanyDbContext context)
         {
             _context = context;
         }
         public IActionResult Index()
         {
             var Dao = new cPostDao(_context);
-            ViewBag.lstData = sDao.getAll();
+            ViewBag.lstData = Dao.getAll();
             return View();
         }
     }

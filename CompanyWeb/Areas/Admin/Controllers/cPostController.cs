@@ -13,7 +13,7 @@ namespace CompanyWeb.Areas.Admin.Controllers
     public class cPostController : Controller
     {
         private readonly CompanyDbContext _context;
-        public sSystemController(CompanyDbContext context)
+        public cPostController(CompanyDbContext context)
         {
             _context = context;
         }
@@ -21,7 +21,7 @@ namespace CompanyWeb.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var Dao = new cPostDao(_context);
-            ViewBag.lstData = sDao.getAll();
+            ViewBag.lstData = Dao.getAll();
             return View();
         }
 
@@ -47,7 +47,7 @@ namespace CompanyWeb.Areas.Admin.Controllers
             item.ID = int.Parse(f["ID"].ToString());
             item.Title = f["Title"].ToString();
             item.MetaTitle = "";
-            item.Status = f["Status"].ToString();
+            item.Status = byte.Parse(f["Status"].ToString());
             if (item.ID == 0)
             {
                 status = Dao.Add(item, ref mess);
