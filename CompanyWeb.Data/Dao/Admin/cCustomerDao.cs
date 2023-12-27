@@ -50,6 +50,7 @@ namespace CompanyWeb.Data.Dao.Admin
             {
                 item.Title = res.Title;
                 item.MetaTitle = res.MetaTitle;
+                item.Status = res.Status;
                 try
                 {
                     _context.SaveChanges();

@@ -55,6 +55,7 @@ namespace CompanyWeb.Data.Dao.Admin
                     item.Image = res.Image;
                 }
                 item.MetaTitle = res.MetaTitle;
+                item.Status = res.Status;
                 try
                 {
                     _context.SaveChanges();

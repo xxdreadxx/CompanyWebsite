@@ -91,6 +91,7 @@ namespace CompanyWeb.Data.Dao.Admin
                 }
                 item.Name = user.Name;
                 item.Password = user.Password;
+                item.Status = user.Status;
                 try
                 {
                     _context.SaveChanges();

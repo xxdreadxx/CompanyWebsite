@@ -56,6 +56,7 @@ namespace CompanyWeb.Data.Dao.Admin
                 item.Position = res.Position;
                 item.ExperienceYear = res.ExperienceYear;
                 item.Content = res.Content;
+                item.Status = res.Status;
                 try
                 {
                     _context.SaveChanges();
