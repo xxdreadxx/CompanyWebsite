@@ -19,7 +19,9 @@ namespace CompanyWeb.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var Dao = new dFeedbackDao(_context);
+            var pDao = new dProductDao(_context);
             ViewBag.lstData = Dao.getAll();
+            ViewBag.lstdProduct = pDao.getAll();
             return View();
         }
 
