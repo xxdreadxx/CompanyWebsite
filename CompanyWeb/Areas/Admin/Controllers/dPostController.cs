@@ -21,7 +21,9 @@ namespace CompanyWeb.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var Dao = new dPostDao(_context);
+            var cDao = new cPostDao(_context);
             ViewBag.lstData = Dao.getAll();
+            ViewBag.lstlstcPost = cDao.getAll();
             return View();
         }
 

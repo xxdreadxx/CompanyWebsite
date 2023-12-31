@@ -2,8 +2,8 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    List<dCustomer> lstData = ViewBag.lstData;
-    List<cCustomer> lstCCus = ViewBag.lstCCus;
+    List<dPost> lstData = ViewBag.lstData;
+    List<cPost> lstlstcPost = ViewBag.lstlstcPost;
     int i = 0;
 }
 
@@ -18,16 +18,16 @@
 
 <div class="card alert">
     <div class="card-header">
-        <h4>Quản lý đối tác </h4>
+        <h4>Quản lý bài viết </h4>
     </div>
     <div class="card-body">
         <table class="table table-responsive table-striped">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Tên đối tác</th>
-                    <th>Logo</th>
-                    <th>Phân loại</th>
+                    <th>Tiêu đề</th>
+                    <th>Hình ảnh</th>
+                    <th>Loại bài viết</th>
                     <th>Trạng thái hiển thị</th>
                     <th></th>
                 </tr>
@@ -39,8 +39,8 @@
                     <tr>
                         <th scope="row">@i</th>
                         <td>@item.Title</td>
-                        <td><img width="100" height="150" src="@item.Avatar" title="@item.Title" /></td>
-                        <td>@item.ID_CCustomer</td>
+                        <td><img width="100" height="150" src="@item.Image" title="@item.Title" /></td>
+                        <td>@item.ID_CPost</td>
                         @if (item.Status == 1)
                         {
                             <td><span class="badge badge-primary">Đang sử dụng</span></td>
@@ -73,20 +73,24 @@
                 <form>
                     <input type="hidden" id="hdID" />
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Tên đối tác:</label>
+                        <label for="recipient-name" class="col-form-label">Tiêu đề:</label>
                         <input type="text" class="form-control" id="txtTitle">
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Phân loại:</label>
-                        <select id="ddlcCus" class="form-control">
-                            @foreach(var item in lstCCus)
+                        <select id="ddlcPost" class="form-control">
+                            @foreach (var item in lstlstcPost)
                             {
                                 <option value="@item.ID">@item.Title</option>
                             }
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Thông tin:</label>
+                        <label for="recipient-name" class="col-form-label">Giới thiệu:</label>
+                        <textarea class="form-control" id="txtDescription" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Nội dung:</label>
                         <textarea class="form-control" id="txtContent" rows="3"></textarea>
                     </div>
                     <div class="form-group">
@@ -107,13 +111,14 @@
     </div>
 </div>
 
-@section Scripts{
+@section Scripts {
     <script>
         function AddItem() {
             $('#mdAoEItem').modal('show');
             $('#txtTitle').val('');
             $('#txtContent').val('');
-            $("#ddlcCus").val($("#ddlcCus option:first").val());
+            $('#txtDescription').val('');
+            $("#ddlcPost").val($("#ddlcPost option:first").val());
             $('#hdID').val('0');
             $('#checkUse').prop('checked', true);
             $('#lbName').text('Thêm mới bản ghi');
@@ -124,7 +129,7 @@
             $('#lbName').text('Chỉnh sửa bản ghi');
             $.ajax({
                 async: false,
-                url: '/Admin/dCustomer/GetDetail',
+                url: '/Admin/dEmployee/GetDetail',
                 data: { ID: ID },
                 type: 'GET',
                 cache: false,
@@ -132,8 +137,9 @@
                     if (res.status == true) {
                         $('#txtTitle').val(res.data1.title);
                         $('#txtContent').val(res.data1.content);
+                        $('#txtDescription').val(res.data1.description);
                         $('#hdID').val(ID);
-                        $("#ddlcCus").val(res.data1.iD_CCustomer).change();
+                        $("#ddlcPost").val(res.data1.iD_CPost).change();
                         if (res.data1.status == 1) {
                             $('#checkUse').prop('checked', true);
                         }
@@ -151,13 +157,14 @@
         }
 
         function SaveData() {
-            var title = $('#txtTitle').val();
+            var Name = $('#txtTitle').val();
             var ID = $('#hdID').val();
-            var ID_CCustomer = $('#ddlcCus').val();
+            var ID_CPost = $('#ddlcPost').val();
+            var Description = $('#txtDescription').val();
             var Content = $('#txtContent').val();
             var status = $('#checkUse').prop("checked") ? 1 : 0;
-            if (title == '') {
-                toastr.error('Chưa nhập tên đối tác!', 'Thông báo', {
+            if (Name == '') {
+                toastr.error('Chưa nhập tiêu đề!', 'Thông báo', {
                     "positionClass": "toast-top-right",
                     timeOut: 5000,
                     "closeButton": true,
@@ -179,13 +186,14 @@
             }
             var formD = new FormData();
             formD.append('ID', ID);
-            formD.append('Title', title);
-            formD.append('ID_CCustomer', ID_CCustomer);
+            formD.append('Title', Title);
+            formD.append('ID_CPost', ID_CPost);
+            formD.append('Description', Description);
             formD.append('Content', Content);
             formD.append('Status', status);
             $.ajax({
                 async: false,
-                url: '/Admin/dCustomer/SaveData',
+                url: '/Admin/dPost/SaveData',
                 data: formD,
                 type: 'POST',
                 cache: false,
@@ -212,7 +220,7 @@
                             "tapToDismiss": false
                         });
                         setTimeout(function () {
-                            location.href = '/Admin/dCustomer/Index';
+                            location.href = '/Admin/dPost/Index';
                         }, 1000);
                     } else {
                         toastr.error(res.mess, 'Lỗi!', 5000);
@@ -227,7 +235,7 @@
         function DelItem(ID, sta) {
             $.ajax({
                 async: false,
-                url: '/Admin/dCustomer/ChangeStatus',
+                url: '/Admin/dPost/ChangeStatus',
                 data: {
                     ID: ID,
                     Status: sta
@@ -256,7 +264,7 @@
                                 "tapToDismiss": false
                             });
                             setTimeout(function () {
-                                location.href = '/Admin/dCustomer/Index';
+                                location.href = '/Admin/dPost/Index';
                             }, 1000);
                         }
                         else {
