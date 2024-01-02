@@ -62,19 +62,19 @@
                                                     <div class="contact-information">
                                                         <div class="phone-content">
                                                             <span class="contact-title" style="width:165px">Lịch sử hình thành:</span>
-                                                            <textarea id="txtLSHT" rows="4" class="form-control">@data.History</textarea>
+                                                            <textarea id="txtLSHT" rows="4" class="form-control editor">@Html.Raw(data.History)</textarea>
                                                         </div>
                                                         <div class="address-content">
                                                             <span class="contact-title" style="width:165px">Giá trị và sứ mệnh:</span>
-                                                            <textarea id="txtGTSM" rows="4" class="form-control">@data.ValueAndMission</textarea>
+                                                            <textarea id="txtGTSM" rows="4" class="form-control editor">@Html.Raw(data.ValueAndMission)</textarea>
                                                         </div>
                                                         <div class="email-content">
                                                             <span class="contact-title" style="width:165px">Điều kiện &amp; quyền lợi:</span>
-                                                            <textarea id="txtUTQL" rows="4" class="form-control">@data.Recruitment_condition</textarea>
+                                                            <textarea id="txtUTQL" rows="4" class="form-control editor">@Html.Raw(data.Recruitment_condition)</textarea>
                                                         </div>
                                                         <div class="website-content">
                                                             <span class="contact-title" style="width:165px">Quy trình ứng tuyển:</span>
-                                                            <textarea id="txtUTQT" rows="4" class="form-control">@data.Recruitment_procedure</textarea>
+                                                            <textarea id="txtUTQT" rows="4" class="form-control editor">@Html.Raw(data.Recruitment_procedure)</textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -146,88 +146,252 @@
     </div>
 </div>
 
-<script>
-    function SaveData() {
-        var txtName = $('#txtName').val();
-        var txtCode = $('#txtCode').val();
-        var txtLSHT = $('#txtLSHT').val();
-        var txtGTSM = $('#txtGTSM').val();
-        var txtUTQL = $('#txtUTQL').val();
-        var txtUTQT = $('#txtUTQT').val();
-        var txtFax = $('#txtFax').val();
-        var txtTaxCode = $('#txtTaxCode').val();
-        var txtPhone = $('#txtPhone').val();
-        var txtMap = $('#txtMap').val();
-        var txtEmail = $('#txtEmail').val();
-        var txtAddress = $('#txtAddress').val();
-        var txtZalo = $('#txtZalo').val();
-        var txtFacebook = $('#txtFacebook').val();
-        var txtInstagram = $('#txtInstagram').val();
-        var txtTiktok = $('#txtTiktok').val();
-        var txtTwitter = $('#txtTwitter').val();
-        if (txtName == '') {
-            toastr.error('Chưa nhập tên công ty!', 'Thông báo', {
-                "positionClass": "toast-top-right",
-                timeOut: 5000,
-                "closeButton": true,
-                "debug": false,
-                "newestOnTop": true,
-                "progressBar": true,
-                "preventDuplicates": true,
-                "onclick": null,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut",
-                "tapToDismiss": false
-            })
-        }
-        else {
-            var formD = new FormData();
-            formD.append('name', txtName);
-            formD.append('code', txtCode);
-            formD.append('lsht', txtLSHT);
-            formD.append('gtsm', txtGTSM);
-            formD.append('utql', txtUTQL);
-            formD.append('utqt', txtUTQT);
-            formD.append('fax', txtFax);
-            formD.append('phone', txtPhone);
-            formD.append('taxcode', txtTaxCode);
-            formD.append('map', txtMap);
-            formD.append('email', txtEmail);
-            formD.append('address', txtAddress);
-            formD.append('zalo', txtZalo);
-            formD.append('facebook', txtFacebook);
-            formD.append('instagram', txtInstagram);
-            formD.append('tiktok', txtTiktok);
-            formD.append('twitter', txtTwitter);
-            $.ajax({
-                async: false,
-                url: '/Admin/sSystem/SaveData',
-                data: formD,
-                //dataType: "json",
-                type: 'POST',
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function (res) {
-                    if (res.status == true) {
-                        toastr.success(res.mess, 'Thông báo!', 5000);
-                        setTimeout(function () {
-                            location.reload();
-                        }, 1000);
-                    } else {
-                        toastr.eror('Có lỗi xảy ra, cập nhật thông tin không thành công', 'Thông báo!', 5000);
+@section Scripts{
+    <script>
+        let editor1;
+        let editor2;
+        let editor3;
+        let editor4;
+        ClassicEditor.create(document.querySelector('#txtLSHT'), {
+            plugins: ['Essentials',
+                'Paragraph',
+                'Heading',
+                'Bold',
+                'Italic',
+                'Underline',
+                'Strikethrough',
+                'SourceEditing',
+                'Subscript',
+                'Superscript',
+                'Alignment',
+                'Indent',
+                'IndentBlock',
+                'BlockQuote',
+                'Link',
+                'Image',
+                'ImageCaption',
+                'ImageStyle',
+                'ImageToolbar',
+                'ImageUpload',
+                'List',
+                'MediaEmbed',
+                'PasteFromOffice',
+                'Table',
+                'TableToolbar',
+                'TableProperties',
+                'TableCellProperties',
+                'Highlight',
+                'FontFamily',
+                'FontSize',
+                'FontColor',
+                'FontBackgroundColor', 'GeneralHtmlSupport', /* ... */]
+        }).then(newEditor => {
+            editor1 = newEditor;
+        })
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor.create(document.querySelector('#txtGTSM'), {
+            plugins: ['Essentials',
+                'Paragraph',
+                'Heading',
+                'Bold',
+                'Italic',
+                'Underline',
+                'Strikethrough',
+                'SourceEditing',
+                'Subscript',
+                'Superscript',
+                'Alignment',
+                'Indent',
+                'IndentBlock',
+                'BlockQuote',
+                'Link',
+                'Image',
+                'ImageCaption',
+                'ImageStyle',
+                'ImageToolbar',
+                'ImageUpload',
+                'List',
+                'MediaEmbed',
+                'PasteFromOffice',
+                'Table',
+                'TableToolbar',
+                'TableProperties',
+                'TableCellProperties',
+                'Highlight',
+                'FontFamily',
+                'FontSize',
+                'FontColor',
+                'FontBackgroundColor', 'GeneralHtmlSupport', /* ... */]
+        }).then(newEditor => {
+            editor2 = newEditor;
+        })
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor.create(document.querySelector('#txtUTQL'), {
+            plugins: ['Essentials',
+                'Paragraph',
+                'Heading',
+                'Bold',
+                'Italic',
+                'Underline',
+                'Strikethrough',
+                'SourceEditing',
+                'Subscript',
+                'Superscript',
+                'Alignment',
+                'Indent',
+                'IndentBlock',
+                'BlockQuote',
+                'Link',
+                'Image',
+                'ImageCaption',
+                'ImageStyle',
+                'ImageToolbar',
+                'ImageUpload',
+                'List',
+                'MediaEmbed',
+                'PasteFromOffice',
+                'Table',
+                'TableToolbar',
+                'TableProperties',
+                'TableCellProperties',
+                'Highlight',
+                'FontFamily',
+                'FontSize',
+                'FontColor',
+                'FontBackgroundColor', 'GeneralHtmlSupport', /* ... */]
+        }).then(newEditor => {
+            editor3 = newEditor;
+        })
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor.create(document.querySelector('#txtUTQT'), {
+            plugins: ['Essentials',
+                'Paragraph',
+                'Heading',
+                'Bold',
+                'Italic',
+                'Underline',
+                'Strikethrough',
+                'SourceEditing',
+                'Subscript',
+                'Superscript',
+                'Alignment',
+                'Indent',
+                'IndentBlock',
+                'BlockQuote',
+                'Link',
+                'Image',
+                'ImageCaption',
+                'ImageStyle',
+                'ImageToolbar',
+                'ImageUpload',
+                'List',
+                'MediaEmbed',
+                'PasteFromOffice',
+                'Table',
+                'TableToolbar',
+                'TableProperties',
+                'TableCellProperties',
+                'Highlight',
+                'FontFamily',
+                'FontSize',
+                'FontColor',
+                'FontBackgroundColor', 'GeneralHtmlSupport', /* ... */]
+        }).then(newEditor => {
+            editor4 = newEditor;
+        })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    <script>
+        function SaveData() {
+            var txtName = $('#txtName').val();
+            var txtCode = $('#txtCode').val();
+            var txtLSHT = editor1.getData();
+            var txtGTSM = editor2.getData();
+            var txtUTQL = editor3.getData();
+            var txtUTQT = editor4.getData();
+            var txtFax = $('#txtFax').val();
+            var txtTaxCode = $('#txtTaxCode').val();
+            var txtPhone = $('#txtPhone').val();
+            var txtMap = $('#txtMap').val();
+            var txtEmail = $('#txtEmail').val();
+            var txtAddress = $('#txtAddress').val();
+            var txtZalo = $('#txtZalo').val();
+            var txtFacebook = $('#txtFacebook').val();
+            var txtInstagram = $('#txtInstagram').val();
+            var txtTiktok = $('#txtTiktok').val();
+            var txtTwitter = $('#txtTwitter').val();
+            if (txtName == '') {
+                toastr.error('Chưa nhập tên công ty!', 'Thông báo', {
+                    "positionClass": "toast-top-right",
+                    timeOut: 5000,
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut",
+                    "tapToDismiss": false
+                })
+            }
+            else {
+                var formD = new FormData();
+                formD.append('name', txtName);
+                formD.append('code', txtCode);
+                formD.append('lsht', txtLSHT);
+                formD.append('gtsm', txtGTSM);
+                formD.append('utql', txtUTQL);
+                formD.append('utqt', txtUTQT);
+                formD.append('fax', txtFax);
+                formD.append('phone', txtPhone);
+                formD.append('taxcode', txtTaxCode);
+                formD.append('map', txtMap);
+                formD.append('email', txtEmail);
+                formD.append('address', txtAddress);
+                formD.append('zalo', txtZalo);
+                formD.append('facebook', txtFacebook);
+                formD.append('instagram', txtInstagram);
+                formD.append('tiktok', txtTiktok);
+                formD.append('twitter', txtTwitter);
+                $.ajax({
+                    async: false,
+                    url: '/Admin/sSystem/SaveData',
+                    data: formD,
+                    //dataType: "json",
+                    type: 'POST',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (res) {
+                        if (res.status == true) {
+                            toastr.success(res.mess, 'Thông báo!', 5000);
+                            setTimeout(function () {
+                                location.reload();
+                            }, 1000);
+                        } else {
+                            toastr.eror('Có lỗi xảy ra, cập nhật thông tin không thành công', 'Thông báo!', 5000);
+                        }
+                    },
+                    error: (error) => {
+                        toastr.error('Có lỗi xả ra, vui lòng thử lại sau', 'Lỗi!', 5000);
+                        console.log(JSON.stringify(error));
                     }
-                },
-                error: (error) => {
-                    toastr.error('Có lỗi xả ra, vui lòng thử lại sau', 'Lỗi!', 5000);
-                    console.log(JSON.stringify(error));
-                }
-            })
+                })
+            }
         }
-    }
-</script>
+    </script>
+}

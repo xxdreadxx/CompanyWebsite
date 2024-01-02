@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace CompanyWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class dRecuitmentController : Controller
+    public class dRecruitmentController : Controller
     {
         private readonly CompanyDbContext _context;
-        public dRecuitmentController(CompanyDbContext context)
+        public dRecruitmentController(CompanyDbContext context)
         {
             _context = context;
         }
@@ -52,13 +52,6 @@ namespace CompanyWeb.Areas.Admin.Controllers
             item.Treatment = f["Treatment"].ToString();
             item.Quantity = int.Parse(f["Quantity"].ToString());
             item.Status = byte.Parse(f["Status"].ToString());
-            //FileDetails fileDetails;
-            //using (var reader = new StreamReader(file.OpenReadStream()))
-            //{
-            //    var fileContent = reader.ReadToEnd();
-            //    var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
-            //    var fileName = parsedContentDisposition.FileName;
-            //}
             if (item.ID == 0)
             {
                 status = Dao.Add(item, ref mess);
