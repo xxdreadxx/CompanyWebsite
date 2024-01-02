@@ -1,0 +1,58 @@
+﻿@using CompanyWeb.Data.Entities;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int Patch = int.Parse(ViewBag.rcmPatch.ToString());
+    sSystem sys = ViewBag.rcm;
+}
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('/Temps/assets/img/breadcrumbs-bg.jpg');">
+        <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+            <h2>@Html.Raw(Patch == 1 ? "Điều kiện & quyền lợi" : "Quy trình ứng tuyển")</h2>
+            <ol>
+                <li><a href="/">Trang chủ</a></li>
+                <li>@Html.Raw(Patch == 1 ? "Điều kiện & quyền lợi" : "Quy trình ứng tuyển")</li>
+            </ol>
+
+        </div>
+    </div><!-- End Breadcrumbs -->
+    <section id="alt-services" class="alt-services">
+        <div class="container" data-aos="fade-up">
+            <div class="row justify-content-around gy-4">
+                @if (Patch == 1)
+                {
+                    <div class="col-lg-6 img-bg" style="background-image: url('/Temps/assets/img/recruitment-condition.jpg');" data-aos="zoom-in" data-aos-delay="100"></div>
+
+                    <div class="col-lg-5 d-flex flex-column justify-content-center">
+                        <h3>Điều kiện & quyền lợi</h3>
+                            @if (sys != null)
+                            {
+                                <p>
+                                    @sys.Recruitment_condition
+                                </p>
+                            }
+                    </div>
+                }
+                else
+                {
+                    <div class="col-lg-6 img-bg" style="background-image: url('/Temps/assets/img/recruitment-procedure.jpg');" data-aos="zoom-in" data-aos-delay="100"></div>
+
+                    <div class="col-lg-5 d-flex flex-column justify-content-center">
+                        <h3>Quy trình ứng tuyền</h3>
+
+                        @if (sys != null)
+                        {
+                            <p>
+                                @sys.Recruitment_procedure
+                            </p>
+                        }
+                    </div>
+                }
+            </div>
+
+        </div>
+    </section><!-- End Alt Services Section -->
+</main><!-- End #main -->

@@ -4,28 +4,22 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CompanyWeb.Controllers
 {
-    public class ProductController : Controller
+    public class FeedbackController : Controller
     {
         private readonly CompanyDbContext _context;
 
-        public ProductController(CompanyDbContext context)
+        public FeedbackController(CompanyDbContext context)
         {
             _context = context;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 10)
         {
-            var dao = new ProductsDao(_context);
+            var dao = new FeedBackDao(_context);
             var daoCategoriesPost = new LayoutDao(_context);
             ViewBag.categoryPosts = daoCategoriesPost.getAllCategories();
-            ViewBag.category = dao.getCategory();
-            ViewBag.products = dao.getAllProduct();
+            ViewBag.lstFeedBacks = dao.getFeedBackPaging(page, pageSize);
 
-            return View();
-        }
-
-        public ActionResult Details(int id)
-        {
             return View();
         }
     }

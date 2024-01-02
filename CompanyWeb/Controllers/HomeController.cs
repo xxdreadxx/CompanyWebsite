@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using CompanyWeb.Data.Dao.Client;
 using CompanyWeb.Data.EF;
-using CompanyWeb.Models;
 
 namespace CompanyWeb.Controllers
 {
@@ -19,12 +18,13 @@ namespace CompanyWeb.Controllers
         public ActionResult Index()
         {
             var dao = new HomeDao(_context);
+            var daoCategoriesPost = new LayoutDao(_context);
+            ViewBag.categoryPosts = daoCategoriesPost.getAllCategories();
             ViewBag.newProduct = dao.getNewdProduct();
             ViewBag.productStatic = dao.getProductStatic();
             ViewBag.customer = dao.getCustomer();
             ViewBag.feedBack = dao.getRandomFeedBack();
             ViewBag.posts = dao.getPots();
-            ViewBag.categoryPosts = dao.getAllCategories();
 
             return View();
         }

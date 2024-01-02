@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    IEnumerable<dPost> lstPosts = ViewBag.lstPostsPaging;
+    IEnumerable<dRecuitment> lstRecruitment = ViewBag.lstRecruitment;
 }
 
 <main id="main">
@@ -12,10 +12,10 @@
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs d-flex align-items-center" style="background-image: url('/Temps/assets/img/breadcrumbs-bg.jpg');">
         <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
-            <h2>Danh sách bài viết</h2>
+            <h2>Danh sách tin tuyển dụng</h2>
             <ol>
                 <li><a href="/">Trang chủ</a></li>
-                <li>Danh sách bài viết</li>
+                <li>Danh sách tin tuyển dụng</li>
             </ol>
 
         </div>
@@ -24,14 +24,16 @@
     <section id="blog" class="blog">
         <div class="container" data-aos="fade-up" data-aos-delay="100">
             <div class="row gy-4 posts-list">
-                @foreach (var item in lstPosts)
+                @foreach (var item in lstRecruitment)
                 {
+                    DateTime hientai = DateTime.Now;
+                    DateTime hethan = (item.ToDate != "" && item.ToDate != null) ? DateTime.ParseExact(item.ToDate, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) : DateTime.Now;
+                    TimeSpan khoang = (hethan - hientai).Duration();
                     <div class="col-xl-4 col-md-6">
                         <div class="post-item position-relative h-100">
 
                             <div class="post-img position-relative overflow-hidden">
-                                <img src="@item.Thumbnail" class="img-fluid" alt="">
-                                <span class="post-date">@item.CreatedDate.Value.ToString("dd/MM/yyyy")</span>
+                                <img src="/Temps/assets/img/recruitment-condition.jpg" class="img-fluid" alt="">
                             </div>
 
                             <div class="post-content d-flex flex-column">
@@ -40,21 +42,13 @@
 
                                 <div class="meta d-flex align-items-center">
                                     <div class="d-flex align-items-center">
-                                        <i class="bi bi-person"></i> <span class="ps-2">Admin</span>
+                                        <i class="bi bi-calendar-week"></i> <span class="ps-2">Còn <b>@khoang.Days</b> ngày để ứng tuyển</span>
                                     </div>
-                                    @*<span class="px-3 text-black-50">/</span>
-                                    <div class="d-flex align-items-center">
-                                        <i class="bi bi-folder2"></i> <span class="ps-2">Politics</span>
-                                    </div>*@
                                 </div>
-
-                                <p>
-                                    @item.Description
-                                </p>
 
                                 <hr>
 
-                                <a href="/Posts/Detail/@item.ID" class="readmore stretched-link"><span>Xem thêm</span><i class="bi bi-arrow-right"></i></a>
+                                <a href="/Recuitment/DetailRecuitment/@item.ID" class="readmore stretched-link"><span>Chi tiết</span><i class="bi bi-arrow-right"></i></a>
 
                             </div>
 
@@ -65,7 +59,7 @@
                 }
 
             </div><!-- End blog posts list -->
-            @Html.PagedListPager((IPagedList)ViewBag.lstPostsPaging, page => Url.Action("Index", new{page = page}))
+            @Html.PagedListPager((IPagedList)ViewBag.lstRecruitment, page => Url.Action("RecruitmentInformation", new{page = page}))
         </div>
     </section><!-- End Blog Section -->
 

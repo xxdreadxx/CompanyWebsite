@@ -1,0 +1,111 @@
+﻿@using CompanyWeb.Data.Entities;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    IEnumerable<dFeedback> lstFeedBacks = ViewBag.lstFeedBacks;
+}
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('/Temps/assets/img/breadcrumbs-bg.jpg');">
+        <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+            <h2>Cảm nhận & phản hồi của người dùng</h2>
+            <ol>
+                <li><a href="/">Trang chủ</a></li>
+                <li>Cảm nhận & phản hồi của người dùng</li>
+            </ol>
+
+        </div>
+    </div><!-- End Breadcrumbs -->
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials section-bg">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row gy-4">
+                <div class="col-lg-12 col-md-12">
+                    <div class="testimonial-wrap">
+                        @foreach (var item in lstFeedBacks)
+                        {
+                            <div class="testimonial-item">
+                                <img src="/temps/assets/img/download.png" class="testimonial-img" alt="">
+                                <h3>@item.Name</h3>
+                                <h4>@item.Company</h4>
+                                <div class="stars">
+                                    @switch (item.Star)
+                                    {
+                                        case 1:
+                                            <i class="bi bi-star-fill"></i>
+
+                                            <i class="bi bi-star"></i>
+
+                                            <i class="bi bi-star"></i>
+
+                                            <i class="bi bi-star"></i>
+
+                                            <i class="bi bi-star"></i>
+                                            break;
+                                        case 2:
+                                            <i class="bi bi-star-fill"></i>
+
+                                            <i class="bi bi-star-fill"></i>
+
+                                            <i class="bi bi-star"></i>
+
+                                            <i class="bi bi-star"></i>
+
+                                            <i class="bi bi-star"></i>
+                                            break;
+                                        case 3:
+                                            <i class="bi bi-star-fill"></i>
+
+                                            <i class="bi bi-star-fill"></i>
+
+                                            <i class="bi bi-star-fill"></i>
+
+                                            <i class="bi bi-star"></i>
+
+                                            <i class="bi bi-star"></i>
+                                            break;
+                                        case 4:
+                                            <i class="bi bi-star-fill"></i>
+
+                                            <i class="bi bi-star-fill"></i>
+
+                                            <i class="bi bi-star-fill"></i>
+
+                                            <i class="bi bi-star-fill"></i>
+
+                                            <i class="bi bi-star"></i>
+                                            break;
+                                        default:
+                                            <i class="bi bi-star-fill"></i>
+
+                                            <i class="bi bi-star-fill"></i>
+
+                                            <i class="bi bi-star-fill"></i>
+
+                                            <i class="bi bi-star-fill"></i>
+
+                                            <i class="bi bi-star-fill"></i>
+                                            break;
+                                    }
+                                </div>
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    @item.Content
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                            </div>
+                        }
+                    </div>
+                </div><!-- End testimonial item -->
+            </div>
+
+            @Html.PagedListPager((IPagedList)ViewBag.lstFeedBacks, page => Url.Action("Index", new{page = page}))
+        </div>
+    </section><!-- End Testimonials Section -->
+
+</main><!-- End #main -->

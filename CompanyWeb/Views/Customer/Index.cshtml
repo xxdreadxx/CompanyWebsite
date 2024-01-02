@@ -1,0 +1,66 @@
+﻿@using CompanyWeb.Data.Entities;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    IEnumerable<dCustomer> lstCustomer = ViewBag.customer;
+    int customerId = ViewBag.customerId;
+    int delay = 0;
+}
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('/Temps/assets/img/breadcrumbs-bg.jpg');">
+        <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+            <h2>@Html.Raw(customerId == 1 ? "Đơn vị hợp tác" : "Khách hàng tin dùng")</h2>
+            <ol>
+                <li><a href="/">Trang chủ</a></li>
+                <li>@Html.Raw(customerId == 1 ? "Đơn vị hợp tác" : "Khách hàng tin dùng")</li>
+            </ol>
+
+        </div>
+    </div><!-- End Breadcrumbs -->
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services section-bg">
+        <div class="container" data-aos="fade-up">
+            <div class="row gy-4">
+                @if (customerId == 1)
+                {
+                    @foreach (var item in lstCustomer)
+                    {
+                        delay = delay + 100;
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="@delay">
+                            <div class="service-item position-relative">
+                                <div class="icon">
+                                    <i class="fa-solid fa-city"></i>
+                                </div>
+                                <h3>@item.Title</h3>
+                                <p>@item.Content</p>
+                            </div>
+                        </div>
+                        <!-- End Service Item -->
+                    }
+                } else
+                {
+                    @foreach (var item in lstCustomer)
+                    {
+                        delay = delay + 100;
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="@delay">
+                            <div class="service-item position-relative">
+                                <div class="icon">
+                                    <i class="fa-solid fa-users"></i>
+                                </div>
+                                <h3>@item.Title</h3>
+                                <p>@item.Content</p>
+                            </div>
+                        </div>
+                        <!-- End Service Item -->
+                    }
+                }
+            </div>
+            @Html.PagedListPager((IPagedList)ViewBag.customer, page => Url.Action("Index", new{id = customerId, page = page}))
+        </div>
+    </section><!-- End Services Section -->
+</main><!-- End #main -->

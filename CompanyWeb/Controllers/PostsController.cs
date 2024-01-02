@@ -12,12 +12,28 @@ namespace CompanyWeb.Controllers
         {
             _context = context;
         }
-        public ActionResult Index(int id = 0)
+
+        public ActionResult Index(int id = 0, int page = 1, int pageSize = 6)
         {
             var dao = new PostsDao(_context);
-            ViewBag.lstPosts = dao.getAlldPostsByCategory(id);
+            var daoCategoriesPost = new LayoutDao(_context);
+            ViewBag.categoryPosts = daoCategoriesPost.getAllCategories();
+            ViewBag.lstPostsPaging = dao.getAlldPostsByCategory(id, page, pageSize);
 
             return View();
+        }
+
+        public ActionResult Detail(int id)
+        {
+            var dao = new PostsDao(_context);
+            var daoCategoriesPost = new LayoutDao(_context);
+            ViewBag.categoryPosts = daoCategoriesPost.getAllCategories();
+            ViewBag.detailPost = dao.getPostById(id);
+            ViewBag.category = dao.getCategoryById(id);
+            ViewBag.lstAllPost = dao.getAllPost();
+            ViewBag.lstRecentPosts = dao.getRecentPosts(id);
+
+            return View(id);
         }
     }
 }

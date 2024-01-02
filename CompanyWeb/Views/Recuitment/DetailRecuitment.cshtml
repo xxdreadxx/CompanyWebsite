@@ -1,0 +1,104 @@
+﻿@using CompanyWeb.Data.Entities;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    dRecuitment detail = ViewBag.detailRecruitment;
+    List<dRecuitment> lstNewRecuitment = ViewBag.getNewRecuitment;
+}
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('/Temps/assets/img/breadcrumbs-bg.jpg');">
+        <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+
+            <h2>Chi tiết tuyển dụng</h2>
+            <ol>
+                <li><a href="/">Trang chủ</a></li>
+                <li>Chi tiết tuyển dụng</li>
+            </ol>
+
+        </div>
+    </div><!-- End Breadcrumbs -->
+    <!-- ======= Blog Details Section ======= -->
+    <section id="blog" class="blog">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="row g-5">
+                <div class="col-lg-8">
+                    <article class="blog-details">
+
+                        <h2 class="title">@detail.Title</h2>
+
+                        <div class="meta-top">
+                            <ul>
+                                <li class="d-flex align-items-center">
+                                    <i class="bi bi-person-workspace"></i>
+                                    <a href="javascript:void(0)">
+                                        Vị trí tuyển: @detail.WorkPosition
+                                    </a>
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <i class="bi bi-people-fill"></i>
+                                    <a href="blog-details.html">
+                                        Số lượng tuyển: @detail.Quantity người
+                                    </a>
+                                </li>
+                            </ul>
+                        </div><!-- End meta top -->
+
+                        <div class="content">
+                            <h3>Mô tả công việc:</h3>
+                            <p>@Html.Raw(detail.Content)</p>
+
+                            <h3>Yêu cầu ứng viên:</h3>
+                            <p>@Html.Raw(detail.Requirement)</p>
+
+                            <h3>Quyền lợi</h3>
+                            <p>@Html.Raw(detail.Treatment)</p>
+
+                            <h3>Địa điểm làm việc:</h3>
+                            <p>@detail.WorkAddress</p>
+
+                            <p>Hạn nộp hồ sơ: @detail.FromDate</p>
+                        </div><!-- End post content -->
+
+                    </article><!-- End blog post -->
+
+                </div>
+
+                <div class="col-lg-4">
+
+                    <div class="sidebar">
+                        <div class="sidebar-item recent-posts">
+                            <h3 class="sidebar-title">Tin tuyển dụng</h3>
+
+                            <div class="mt-3">
+                                @foreach (var item in lstNewRecuitment)
+                                {
+                                    DateTime hientai = DateTime.Now;
+                                    DateTime hethan = (item.ToDate != "" && item.ToDate != null) ? DateTime.ParseExact(item.ToDate, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) : DateTime.Now;
+                                    TimeSpan khoang = (hethan - hientai).Duration();
+                                    <div class="post-item mt-3">
+                                        <img src="/Temps/assets/img/recruitment-condition.jpg" alt="@item.Title">
+                                        <div>
+                                            <h4><a href="/Recuitment/DetailRecuitment/@item.ID">@item.Title</a></h4>
+                                            <time>Còn <b>@khoang.Days</b> ngày để ứng tuyển</time>
+                                        </div>
+                                    </div>
+
+                                    <!-- End recent post item-->
+                                }
+
+                            </div>
+
+                        </div><!-- End sidebar recent posts-->
+
+                    </div><!-- End Blog Sidebar -->
+
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End Blog Details Section -->
+
+</main><!-- End #main -->

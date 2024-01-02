@@ -39,11 +39,6 @@ namespace CompanyWeb.Data.Dao.Client
             return result;
         }
 
-        public List<cPost> getAllCategories()
-        {
-            return _context.cPosts.Where(x => x.Status == 1).ToList();
-        }
-
         public List<dPost> getPots()
         {
             return _context.dPosts.Where(x => x.Status == 1).OrderByDescending(x => x.CreatedDate).Take(3).ToList();
