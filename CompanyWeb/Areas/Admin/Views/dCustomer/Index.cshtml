@@ -9,7 +9,7 @@
 
 <style>
     .modal-dialog {
-        top: 20%;
+        top: 35%;
         width: 50%
     }
 </style>
@@ -109,10 +109,52 @@
 
 @section Scripts{
     <script>
+        let editor;
+        ClassicEditor.create(document.querySelector('#txtContent'), {
+            plugins: ['Essentials',
+                'Paragraph',
+                'Heading',
+                'Bold',
+                'Italic',
+                'Underline',
+                'Strikethrough',
+                'SourceEditing',
+                'Subscript',
+                'Superscript',
+                'Alignment',
+                'Indent',
+                'IndentBlock',
+                'BlockQuote',
+                'Link',
+                'Image',
+                'ImageCaption',
+                'ImageStyle',
+                'ImageToolbar',
+                'ImageUpload',
+                'List',
+                'MediaEmbed',
+                'PasteFromOffice',
+                'Table',
+                'TableToolbar',
+                'TableProperties',
+                'TableCellProperties',
+                'Highlight',
+                'FontFamily',
+                'FontSize',
+                'FontColor',
+                'FontBackgroundColor', 'GeneralHtmlSupport', /* ... */]
+        }).then(newEditor => {
+            editor = newEditor;
+        })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    <script>
         function AddItem() {
             $('#mdAoEItem').modal('show');
             $('#txtTitle').val('');
-            $('#txtContent').val('');
+            editor.setData('');
             $("#ddlcCus").val($("#ddlcCus option:first").val());
             $('#hdID').val('0');
             $('#checkUse').prop('checked', true);
@@ -131,7 +173,7 @@
                 success: function (res) {
                     if (res.status == true) {
                         $('#txtTitle').val(res.data1.title);
-                        $('#txtContent').val(res.data1.content);
+                        editor.setData(res.data1.content);
                         $('#hdID').val(ID);
                         $("#ddlcCus").val(res.data1.iD_CCustomer).change();
                         if (res.data1.status == 1) {
@@ -154,7 +196,7 @@
             var title = $('#txtTitle').val();
             var ID = $('#hdID').val();
             var ID_CCustomer = $('#ddlcCus').val();
-            var Content = $('#txtContent').val();
+            var Content = editor.getData();
             var status = $('#checkUse').prop("checked") ? 1 : 0;
             if (title == '') {
                 toastr.error('Chưa nhập tên đối tác!', 'Thông báo', {
