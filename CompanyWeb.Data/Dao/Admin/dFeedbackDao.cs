@@ -52,6 +52,7 @@ namespace CompanyWeb.Data.Dao.Admin
                 item.IDProduct = res.IDProduct;
                 item.Star = res.Star;
                 item.Content = res.Content;
+                item.Status = res.Status;
                 try
                 {
                     _context.SaveChanges();

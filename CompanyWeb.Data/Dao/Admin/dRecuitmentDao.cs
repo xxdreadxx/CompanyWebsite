@@ -57,6 +57,7 @@ namespace CompanyWeb.Data.Dao.Admin
                 item.Content = res.Content;
                 item.FromDate = res.FromDate;
                 item.ToDate = res.ToDate;
+                item.Status = res.Status;
                 try
                 {
                     _context.SaveChanges();

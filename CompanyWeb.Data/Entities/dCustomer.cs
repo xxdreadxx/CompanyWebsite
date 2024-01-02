@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,5 +17,10 @@ namespace CompanyWeb.Data.Entities
         public string? Content { get; set; }
         public byte? Status { get; set; }
         public DateTime? CreatedDate { get; set; }
+    }
+
+    [NotMapped]
+    public class dCustomerView:dCustomer { 
+        public string CCustomer_Title { get; set; }
     }
 }

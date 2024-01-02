@@ -61,6 +61,7 @@ namespace CompanyWeb.Data.Dao.Admin
                 item.MetaTitle = res.MetaTitle;
                 item.Description = res.Description;
                 item.Content = res.Content;
+                item.Status = res.Status;
                 try
                 {
                     _context.SaveChanges();

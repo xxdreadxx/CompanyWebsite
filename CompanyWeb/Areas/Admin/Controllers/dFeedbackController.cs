@@ -1,34 +1,34 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CompanyWeb.Data.Dao.Admin;
+﻿using CompanyWeb.Data.Dao.Admin;
 using CompanyWeb.Data.EF;
 using CompanyWeb.Data.Entities;
+using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Headers;
 
 namespace CompanyWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class cPostController : Controller
+    public class dFeedbackController : Controller
     {
+
         private readonly CompanyDbContext _context;
-        public cPostController(CompanyDbContext context)
+        public dFeedbackController(CompanyDbContext context)
         {
             _context = context;
         }
 
         public IActionResult Index()
         {
-            var Dao = new cPostDao(_context);
+            var Dao = new dFeedbackDao(_context);
+            var pDao = new dProductDao(_context);
             ViewBag.lstData = Dao.getAll();
+            ViewBag.lstdProduct = pDao.getAll();
             return View();
         }
 
         [HttpGet]
         public JsonResult GetDetail(int ID)
         {
-            var Dao = new cPostDao(_context);
+            var Dao = new dFeedbackDao(_context);
             var detail = Dao.getDetail(ID);
             var data = new { data1 = detail, status = true };
             var result = new JsonResult(data);
@@ -38,16 +38,27 @@ namespace CompanyWeb.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        //, IFormFile file
         public JsonResult SaveData(IFormCollection f)
         {
-            var Dao = new cPostDao(_context);
+            var Dao = new dFeedbackDao(_context);
             bool status = true;
             string mess = "";
-            cPost item = new cPost();
+            dFeedback item = new dFeedback();
             item.ID = int.Parse(f["ID"].ToString());
-            item.Title = f["Title"].ToString();
-            item.MetaTitle = "";
+            item.Name = f["Name"].ToString();
+            item.Company = f["Company"].ToString();
+            item.IDProduct = int.Parse(f["IDProduct"].ToString());
+            item.Star = int.Parse(f["Star"].ToString());
+            item.Content = f["Content"].ToString(); ;
             item.Status = byte.Parse(f["Status"].ToString());
+            //FileDetails fileDetails;
+            //using (var reader = new StreamReader(file.OpenReadStream()))
+            //{
+            //    var fileContent = reader.ReadToEnd();
+            //    var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+            //    var fileName = parsedContentDisposition.FileName;
+            //}
             if (item.ID == 0)
             {
                 status = Dao.Add(item, ref mess);
@@ -66,7 +77,7 @@ namespace CompanyWeb.Areas.Admin.Controllers
         [HttpPost]
         public JsonResult ChangeStatus(int ID, byte stt)
         {
-            var Dao = new cPostDao(_context);
+            var Dao = new dFeedbackDao(_context);
             bool status = true;
             string mess = "";
             status = Dao.ChangeStatus(ID, stt, ref mess);

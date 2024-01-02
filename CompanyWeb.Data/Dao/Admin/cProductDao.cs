@@ -33,6 +33,7 @@ namespace CompanyWeb.Data.Dao.Admin
             {
                 _context.cProducts.Add(item);
                 _context.SaveChanges();
+                mess = "Thêm mới thành công";
             }
             catch (Exception ex)
             {
@@ -54,9 +55,11 @@ namespace CompanyWeb.Data.Dao.Admin
                     item.Image = res.Image;
                 }
                 item.MetaTitle = res.MetaTitle;
+                item.Status = res.Status;
                 try
                 {
                     _context.SaveChanges();
+                    mess = "Cập nhật thành công";
                 }
                 catch (Exception ex)
                 {

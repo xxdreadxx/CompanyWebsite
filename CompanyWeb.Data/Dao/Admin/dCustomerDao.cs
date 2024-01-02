@@ -51,6 +51,7 @@ namespace CompanyWeb.Data.Dao.Admin
                 item.Title = res.Title;
                 item.MetaTitle = res.MetaTitle;
                 item.Content = res.Content;
+                item.Status = res.Status;
                 if (res.Avatar != null)
                 {
                     item.Avatar = res.Avatar;

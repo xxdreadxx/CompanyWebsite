@@ -50,6 +50,7 @@ namespace CompanyWeb.Data.Dao.Admin
             {
                 item.Question = res.Question;
                 item.Answer = res.Answer;
+                item.Status = res.Status;
                 try
                 {
                     _context.SaveChanges();

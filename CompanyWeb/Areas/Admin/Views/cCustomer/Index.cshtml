@@ -1,61 +1,43 @@
-﻿
+﻿@using CompanyWeb.Data.Entities;
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<cCustomer> lstData = ViewBag.lstData;
+    int i = 0;
 }
 
 <div class="card alert">
     <div class="card-header">
-        <h4>Table Striped </h4>
-        <div class="card-header-right-icon">
-            <ul>
-                <li class="card-close" data-dismiss="alert"><i class="ti-close"></i></li>
-                <li class="card-option drop-menu">
-                    <i class="ti-settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="link"></i>
-                    <ul class="card-option-dropdown dropdown-menu">
-                        <li><a href="#"><i class="ti-loop"></i> Update data</a></li>
-                        <li><a href="#"><i class="ti-menu-alt"></i> Detail log</a></li>
-                        <li><a href="#"><i class="ti-pulse"></i> Statistics</a></li>
-                        <li><a href="#"><i class="ti-power-off"></i> Clear ist</a></li>
-                    </ul>
-                </li>
-
-            </ul>
-        </div>
+        <h4>Quản lý phân loại đối tác </h4>
     </div>
     <div class="card-body">
         <table class="table table-responsive table-striped">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Date</th>
-                    <th>Price</th>
+                    <th>Tên phân loại</th>
+                    <th>Trạng thái hiển thị</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Kolor Tea Shirt For Man</td>
-                    <td><span class="badge badge-primary">Sale</span></td>
-                    <td>January 22</td>
-                    <td class="color-primary">$21.56</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Kolor Tea Shirt For Women</td>
-                    <td><span class="badge badge-success">Tax</span></td>
-                    <td>January 30</td>
-                    <td class="color-success">$55.32</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Blue Backpack For Baby</td>
-                    <td><span class="badge badge-danger">Extended</span></td>
-                    <td>January 25</td>
-                    <td class="color-danger">$14.85</td>
-                </tr>
+                @foreach(var item in lstData)
+                {
+                    i++;
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td>@item.Title</td>
+                        @if (item.Status == 1)
+                        {
+                            <td><span class="badge badge-primary">Đang sử dụng</span></td>
+                        }
+                        else
+                        {
+                            <td><span class="badge badge-default">Dừng sử dụng</span></td>
+                        }
+                        <td class="color-primary"><a class="badge label-danger" onclick="DelItem(@item.ID)"><i class="ti-trash"></i></a></td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
