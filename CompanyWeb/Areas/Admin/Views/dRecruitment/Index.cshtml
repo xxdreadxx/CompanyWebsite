@@ -8,7 +8,7 @@
 
 <style>
     .modal-dialog {
-        top: 20%;
+        top: 70%;
         width: 50%
     }
 </style>
@@ -82,12 +82,17 @@
                         <input type="text" class="form-control" id="txtPosition">
                     </div>
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Từ ngày:</label>
-                        <input type="text" class="form-control" id="txtFromDate">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Đến ngày:</label>
-                        <input type="text" class="form-control" id="txtToDate">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="recipient-name" class="col-form-label">Từ ngày:</label>
+                                <input type="text" class="form-control" id="txtFromDate">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="recipient-name" class="col-form-label">Đến ngày:</label>
+                                <input type="text" class="form-control" id="txtToDate">
+                            </div>
+                        </div>
+                        
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Số lượng tuyển:</label>
@@ -129,6 +134,128 @@
 
 @section Scripts {
     <script>
+        let editor1;
+        let editor2;
+        let editor3;
+        ClassicEditor.create(document.querySelector('#txtRequirement'), {
+            plugins: ['Essentials',
+                'Paragraph',
+                'Heading',
+                'Bold',
+                'Italic',
+                'Underline',
+                'Strikethrough',
+                'SourceEditing',
+                'Subscript',
+                'Superscript',
+                'Alignment',
+                'Indent',
+                'IndentBlock',
+                'BlockQuote',
+                'Link',
+                'Image',
+                'ImageCaption',
+                'ImageStyle',
+                'ImageToolbar',
+                'ImageUpload',
+                'List',
+                'MediaEmbed',
+                'PasteFromOffice',
+                'Table',
+                'TableToolbar',
+                'TableProperties',
+                'TableCellProperties',
+                'Highlight',
+                'FontFamily',
+                'FontSize',
+                'FontColor',
+                'FontBackgroundColor', 'GeneralHtmlSupport', /* ... */]
+        }).then(newEditor => {
+            editor1 = newEditor;
+        })
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor.create(document.querySelector('#txtTreatment'), {
+            plugins: ['Essentials',
+                'Paragraph',
+                'Heading',
+                'Bold',
+                'Italic',
+                'Underline',
+                'Strikethrough',
+                'SourceEditing',
+                'Subscript',
+                'Superscript',
+                'Alignment',
+                'Indent',
+                'IndentBlock',
+                'BlockQuote',
+                'Link',
+                'Image',
+                'ImageCaption',
+                'ImageStyle',
+                'ImageToolbar',
+                'ImageUpload',
+                'List',
+                'MediaEmbed',
+                'PasteFromOffice',
+                'Table',
+                'TableToolbar',
+                'TableProperties',
+                'TableCellProperties',
+                'Highlight',
+                'FontFamily',
+                'FontSize',
+                'FontColor',
+                'FontBackgroundColor', 'GeneralHtmlSupport', /* ... */]
+        }).then(newEditor => {
+            editor2 = newEditor;
+        })
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor.create(document.querySelector('#txtContent'), {
+            plugins: ['Essentials',
+                'Paragraph',
+                'Heading',
+                'Bold',
+                'Italic',
+                'Underline',
+                'Strikethrough',
+                'SourceEditing',
+                'Subscript',
+                'Superscript',
+                'Alignment',
+                'Indent',
+                'IndentBlock',
+                'BlockQuote',
+                'Link',
+                'Image',
+                'ImageCaption',
+                'ImageStyle',
+                'ImageToolbar',
+                'ImageUpload',
+                'List',
+                'MediaEmbed',
+                'PasteFromOffice',
+                'Table',
+                'TableToolbar',
+                'TableProperties',
+                'TableCellProperties',
+                'Highlight',
+                'FontFamily',
+                'FontSize',
+                'FontColor',
+                'FontBackgroundColor', 'GeneralHtmlSupport', /* ... */]
+        }).then(newEditor => {
+            editor3 = newEditor;
+        })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    <script>
         function AddItem() {
             $('#mdAoEItem').modal('show');
             $('#txtTitle').val('');
@@ -136,10 +263,10 @@
             $('#txtFromDate').val('');
             $('#txtToDate').val('');
             $('#txtQuantity').val('0');
+            editor1.setData('');
+            editor2.setData('');
+            editor3.setData('');
             $('#txtWorkAddress').val('');
-            $('#txtRequirement').val('');
-            $('#txtTreatment').val('');
-            $('#txtContent').val('');
             $('#hdID').val('0');
             $('#checkUse').prop('checked', true);
             $('#lbName').text('Thêm mới bản ghi');
@@ -162,9 +289,9 @@
                         $('#txtToDate').val(res.data1.toDate);
                         $('#txtQuantity').val(res.data1.quantity);
                         $('#txtWorkAddress').val(res.data1.workAddress);
-                        $('#txtRequirement').val(res.data1.requirement);
-                        $('#txtTreatment').val(res.data1.treatment);
-                        $('#txtContent').val(res.data1.content);
+                        editor1.setData(res.data1.requirement);
+                        editor2.setData(res.data1.treatment);
+                        editor3.setData(res.data1.content);
                         $('#hdID').val(ID);
                         if (res.data1.status == 1) {
                             $('#checkUse').prop('checked', true);
@@ -190,9 +317,9 @@
             var ToDate = $('#txtToDate').val();
             var Quantity = $('#txtQuantity').val();
             var WorkAddress = $('#txtWorkAddress').val();
-            var Requirement = $('#txtRequirement').val();
-            var Treatment = $('#txtTreatment').val();
-            var Content = $('#txtContent').val();
+            var Requirement = editor1.getData();
+            var Treatment = editor2.getData();
+            var Content = editor3.getData();
             var status = $('#checkUse').prop("checked") ? 1 : 0;
             if (title == '') {
                 toastr.error('Chưa nhập tên sản phẩm!', 'Thông báo', {

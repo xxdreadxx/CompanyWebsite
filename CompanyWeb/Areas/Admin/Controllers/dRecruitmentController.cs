@@ -44,7 +44,7 @@ namespace CompanyWeb.Areas.Admin.Controllers
             item.ID = int.Parse(f["ID"].ToString());
             item.Title = f["Title"].ToString();
             item.Content = f["Content"].ToString();
-            item.WorkPosition = f["WorkPosition"].ToString();
+            item.WorkPosition = f["Position"].ToString();
             item.WorkAddress = f["WorkAddress"].ToString();
             item.FromDate = f["FromDate"].ToString();
             item.ToDate = f["ToDate"].ToString();
