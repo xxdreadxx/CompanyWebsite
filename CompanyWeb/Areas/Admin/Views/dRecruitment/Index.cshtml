@@ -126,7 +126,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <a class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5" onclick="SaveData()"><i class="ti ti-save"></i>Thêm mới</a>
+                <a class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5" onclick="SaveData()"><i class="ti ti-save"></i>Lưu</a>
             </div>
         </div>
     </div>
@@ -407,8 +407,7 @@
                 cache: false,
                 success: function (res) {
                     if (res.status == true) {
-                        if (res.data.Status == true) {
-                            toastr.success(res.mess, 'Thông báo', {
+                            toastr.success('Xóa bản ghi thành công', 'Thông báo', {
                                 "positionClass": "toast-top-right",
                                 timeOut: 5000,
                                 "closeButton": true,
@@ -429,10 +428,6 @@
                             setTimeout(function () {
                                 location.href = '/Admin/dRecruitment/Index';
                             }, 1000);
-                        }
-                        else {
-                            toastr.error(res.mess, 'Lỗi!', 5000);
-                        }
                     } else {
                         toastr.error(res.mess, 'Lỗi!', 5000);
                     }

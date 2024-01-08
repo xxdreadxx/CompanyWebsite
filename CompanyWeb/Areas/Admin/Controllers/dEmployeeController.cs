@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CompanyWeb.Data.Dao.Admin;
 using CompanyWeb.Data.EF;
 using CompanyWeb.Data.Entities;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace CompanyWeb.Areas.Admin.Controllers
 {
@@ -13,9 +14,11 @@ namespace CompanyWeb.Areas.Admin.Controllers
     public class dEmployeeController : Controller
     {
         private readonly CompanyDbContext _context;
-        public dEmployeeController(CompanyDbContext context)
+        IHostingEnvironment _hostingEnvironment;
+        public dEmployeeController(CompanyDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public IActionResult Index()
@@ -39,8 +42,25 @@ namespace CompanyWeb.Areas.Admin.Controllers
 
         [HttpPost]
         //, IFormFile file
-        public JsonResult SaveData(IFormCollection f)
+        public async Task<JsonResult> SaveData(IFormCollection f, IFormFile file)
         {
+            string pathImg = "Content\\dEmployee\\Images";
+            string filePath = "";
+            string filePathImg = "";
+            string uploads = Path.Combine(_hostingEnvironment.WebRootPath, pathImg);
+            if (file.Length > 0)
+            {
+                if (!Directory.Exists(uploads))
+                {
+                    Directory.CreateDirectory(uploads);
+                }
+                filePath = Path.Combine(uploads, file.FileName);
+                using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(fileStream);
+                    filePathImg = Path.Combine(pathImg, file.FileName);
+                }
+            }
             var Dao = new dEmployeeDao(_context);
             bool status = true;
             string mess = "";
@@ -51,13 +71,7 @@ namespace CompanyWeb.Areas.Admin.Controllers
             item.ExperienceYear = f["ExperienceYear"].ToString();
             item.Content = f["Content"].ToString();
             item.Status = byte.Parse(f["Status"].ToString());
-            //FileDetails fileDetails;
-            //using (var reader = new StreamReader(file.OpenReadStream()))
-            //{
-            //    var fileContent = reader.ReadToEnd();
-            //    var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
-            //    var fileName = parsedContentDisposition.FileName;
-            //}
+            item.Avatar = "\\" + filePathImg;
             if (item.ID == 0)
             {
                 status = Dao.Add(item, ref mess);
@@ -74,12 +88,12 @@ namespace CompanyWeb.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public JsonResult ChangeStatus(int ID, byte stt)
+        public JsonResult ChangeStatus(int ID, byte Status)
         {
             var Dao = new dEmployeeDao(_context);
             bool status = true;
             string mess = "";
-            status = Dao.ChangeStatus(ID, stt, ref mess);
+            status = Dao.ChangeStatus(ID, Status, ref mess);
             var data = new { status = status, mess = mess };
             var result = new JsonResult(data);
             result.StatusCode = 200;

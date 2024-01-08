@@ -68,12 +68,12 @@ namespace CompanyWeb.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public JsonResult ChangeStatus(int ID, byte stt)
+        public JsonResult ChangeStatus(int ID, byte Status)
         {
             var Dao = new dRecuitmentDao(_context);
             bool status = true;
             string mess = "";
-            status = Dao.ChangeStatus(ID, stt, ref mess);
+            status = Dao.ChangeStatus(ID, Status, ref mess);
             var data = new { status = status, mess = mess };
             var result = new JsonResult(data);
             result.StatusCode = 200;

@@ -42,7 +42,12 @@
                                     <div class="row">
                                         <div class="col-lg-4">
                                             <div class="user-photo">
-                                                <img class="img-responsive" src="@data.Favicon" alt="" />
+                                                @* <img class="img-responsive" src="@data.Favicon" alt="" /> *@
+                                                <img class="img-responsive" id="imgAvatar" src="@data.Favicon" />
+                                                <label for="f00_Image" class="a_hover" style="position: absolute; transform: translate(-5px, -130px);">
+                                                    <i class="fa fa-camera" for="f00_Image" style="font-size:30px; color:#12111175"></i>
+                                                </label>
+                                                <input type="file" id="f00_Image" onchange="changeIMG()" name="f00_Image" accept="*/image" style="display:none" />
                                             </div>
                                         </div>
                                         <div class="col-lg-8">
@@ -310,7 +315,21 @@
             });
     </script>
     <script>
+        function changeIMG() {
+            var f = document.getElementById("f00_Image").files;
+            if (f.length > 0) {
+                var fileToLoad = f[0];
+                var fileReader = new FileReader();
+                fileReader.onload = function (fileLoadedEvent) {
+                    var srcData = fileLoadedEvent.target.result; // <--- data: base64
+                    document.getElementById("imgAvatar").src = srcData;
+                }
+                fileReader.readAsDataURL(fileToLoad);
+            }
+        };
         function SaveData() {
+            var fileI = document.getElementById("f00_Image").files[0];
+            
             var txtName = $('#txtName').val();
             var txtCode = $('#txtCode').val();
             var txtLSHT = editor1.getData();
@@ -367,6 +386,9 @@
                 formD.append('instagram', txtInstagram);
                 formD.append('tiktok', txtTiktok);
                 formD.append('twitter', txtTwitter);
+                if (fileI != undefined) {
+                    formD.append("file", fileI);
+                }
                 $.ajax({
                     async: false,
                     url: '/Admin/sSystem/SaveData',

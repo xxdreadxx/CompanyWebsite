@@ -9,7 +9,7 @@
 
 <style>
     .modal-dialog {
-        top: 45%;
+        top: 55%;
         width: 50%
     }
 </style>
@@ -73,17 +73,31 @@
                 <form>
                     <input type="hidden" id="hdID" />
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Tiêu đề:</label>
-                        <input type="text" class="form-control" id="txtTitle">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="recipient-name" class="col-form-label">Tiêu đề:</label>
+                                <input type="text" class="form-control" id="txtTitle">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="recipient-name" class="col-form-label">Phân loại:</label>
+                                <select id="ddlcPost" class="form-control">
+                                    @foreach (var item in lstlstcPost)
+                                    {
+                                        <option value="@item.ID">@item.Title</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Phân loại:</label>
-                        <select id="ddlcPost" class="form-control">
-                            @foreach (var item in lstlstcPost)
-                            {
-                                <option value="@item.ID">@item.Title</option>
-                            }
-                        </select>
+                        <div class="user-photo">
+                            @* <img class="img-responsive" src="@data.Favicon" alt="" /> *@
+                            <img class="img-responsive" id="imgAvatar" src="/images/noimage.png" height="150" width="200" />
+                            <label for="f00_Image" class="a_hover" style="position: absolute; transform: translate(5px, -170px);">
+                                <i class="fa fa-camera" for="f00_Image" style="font-size:30px; color:#12111175"></i>
+                            </label>
+                            <input type="file" id="f00_Image" onchange="changeIMG()" name="f00_Image" accept="*/image" style="display:none" />
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Giới thiệu:</label>
@@ -105,7 +119,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <a class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5" onclick="SaveData()"><i class="ti ti-save"></i>Thêm mới</a>
+                <a class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5" onclick="SaveData()"><i class="ti ti-save"></i>Lưu</a>
             </div>
         </div>
     </div>
@@ -195,6 +209,18 @@
             });
     </script>
     <script>
+        function changeIMG() {
+            var f = document.getElementById("f00_Image").files;
+            if (f.length > 0) {
+                var fileToLoad = f[0];
+                var fileReader = new FileReader();
+                fileReader.onload = function (fileLoadedEvent) {
+                    var srcData = fileLoadedEvent.target.result; // <--- data: base64
+                    document.getElementById("imgAvatar").src = srcData;
+                }
+                fileReader.readAsDataURL(fileToLoad);
+            }
+        };
         function AddItem() {
             $('#mdAoEItem').modal('show');
             $('#txtTitle').val('');
@@ -204,6 +230,7 @@
             $('#hdID').val('0');
             $('#checkUse').prop('checked', true);
             $('#lbName').text('Thêm mới bản ghi');
+            $('#imgAvatar').attr("src", '/images/noimage.png');
         }
 
         function EditItem(ID) {
@@ -221,6 +248,7 @@
                         editor.setData(res.data1.content);
                         editor.setData(res.data1.description);
                         $('#hdID').val(ID);
+                        $('#imgAvatar').attr("src", res.data1.image);
                         $("#ddlcPost").val(res.data1.iD_CPost).change();
                         if (res.data1.status == 1) {
                             $('#checkUse').prop('checked', true);
@@ -239,6 +267,7 @@
         }
 
         function SaveData() {
+            var fileI = document.getElementById("f00_Image").files[0];
             var Name = $('#txtTitle').val();
             var ID = $('#hdID').val();
             var ID_CPost = $('#ddlcPost').val();
@@ -273,6 +302,9 @@
             formD.append('Description', Description);
             formD.append('Content', Content);
             formD.append('Status', status);
+            if (fileI != undefined) {
+                formD.append("file", fileI);
+            }
             $.ajax({
                 async: false,
                 url: '/Admin/dPost/SaveData',
@@ -326,32 +358,27 @@
                 cache: false,
                 success: function (res) {
                     if (res.status == true) {
-                        if (res.data.Status == true) {
-                            toastr.success(res.mess, 'Thông báo', {
-                                "positionClass": "toast-top-right",
-                                timeOut: 5000,
-                                "closeButton": true,
-                                "debug": false,
-                                "newestOnTop": true,
-                                "progressBar": true,
-                                "preventDuplicates": true,
-                                "onclick": null,
-                                "showDuration": "300",
-                                "hideDuration": "1000",
-                                "extendedTimeOut": "1000",
-                                "showEasing": "swing",
-                                "hideEasing": "linear",
-                                "showMethod": "fadeIn",
-                                "hideMethod": "fadeOut",
-                                "tapToDismiss": false
-                            });
-                            setTimeout(function () {
-                                location.href = '/Admin/dPost/Index';
-                            }, 1000);
-                        }
-                        else {
-                            toastr.error(res.mess, 'Lỗi!', 5000);
-                        }
+                        toastr.success('Xóa bản ghi thành công', 'Thông báo', {
+                            "positionClass": "toast-top-right",
+                            timeOut: 5000,
+                            "closeButton": true,
+                            "debug": false,
+                            "newestOnTop": true,
+                            "progressBar": true,
+                            "preventDuplicates": true,
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut",
+                            "tapToDismiss": false
+                        });
+                        setTimeout(function () {
+                            location.href = '/Admin/dPost/Index';
+                        }, 1000);
                     } else {
                         toastr.error(res.mess, 'Lỗi!', 5000);
                     }

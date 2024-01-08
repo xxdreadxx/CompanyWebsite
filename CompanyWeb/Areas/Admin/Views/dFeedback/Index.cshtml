@@ -109,7 +109,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <a class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5" onclick="SaveData()"><i class="ti ti-save"></i>Thêm mới</a>
+                <a class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5" onclick="SaveData()"><i class="ti ti-save"></i>Lưu</a>
             </div>
         </div>
     </div>
@@ -250,32 +250,27 @@
                 cache: false,
                 success: function (res) {
                     if (res.status == true) {
-                        if (res.data.Status == true) {
-                            toastr.success(res.mess, 'Thông báo', {
-                                "positionClass": "toast-top-right",
-                                timeOut: 5000,
-                                "closeButton": true,
-                                "debug": false,
-                                "newestOnTop": true,
-                                "progressBar": true,
-                                "preventDuplicates": true,
-                                "onclick": null,
-                                "showDuration": "300",
-                                "hideDuration": "1000",
-                                "extendedTimeOut": "1000",
-                                "showEasing": "swing",
-                                "hideEasing": "linear",
-                                "showMethod": "fadeIn",
-                                "hideMethod": "fadeOut",
-                                "tapToDismiss": false
-                            });
-                            setTimeout(function () {
-                                location.href = '/Admin/dFeedback/Index';
-                            }, 1000);
-                        }
-                        else {
-                            toastr.error(res.mess, 'Lỗi!', 5000);
-                        }
+                        toastr.success('Xóa bản ghi thành công', 'Thông báo', {
+                            "positionClass": "toast-top-right",
+                            timeOut: 5000,
+                            "closeButton": true,
+                            "debug": false,
+                            "newestOnTop": true,
+                            "progressBar": true,
+                            "preventDuplicates": true,
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut",
+                            "tapToDismiss": false
+                        });
+                        setTimeout(function () {
+                            location.href = '/Admin/dFeedback/Index';
+                        }, 1000);
                     } else {
                         toastr.error(res.mess, 'Lỗi!', 5000);
                     }
