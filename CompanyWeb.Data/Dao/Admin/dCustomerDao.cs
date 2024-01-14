@@ -52,7 +52,7 @@ namespace CompanyWeb.Data.Dao.Admin
                 item.MetaTitle = res.MetaTitle;
                 item.Content = res.Content;
                 item.Status = res.Status;
-                if (res.Avatar != null)
+                if (res.Avatar != "\\")
                 {
                     item.Avatar = res.Avatar;
                 }

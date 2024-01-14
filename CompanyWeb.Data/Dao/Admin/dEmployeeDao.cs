@@ -49,7 +49,7 @@ namespace CompanyWeb.Data.Dao.Admin
             if (item != null)
             {
                 item.Name = res.Name;
-                if (res.Avatar != null)
+                if (res.Avatar != "\\")
                 {
                     item.Avatar = res.Avatar;
                 }

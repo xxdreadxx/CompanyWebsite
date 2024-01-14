@@ -51,7 +51,7 @@ namespace CompanyWeb.Areas.Admin.Controllers
             string filePath = "";
             string filePathImg = "";
             string uploads = Path.Combine(_hostingEnvironment.WebRootPath, pathImg);
-            if (file.Length > 0)
+            if (file != null)
             {
                 if (!Directory.Exists(uploads))
                 {

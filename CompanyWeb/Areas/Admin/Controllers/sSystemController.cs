@@ -35,7 +35,7 @@ namespace CompanyWeb.Areas.Admin.Controllers
                 string filePath = "";
                 string filePathImg = "";
                 string uploads = Path.Combine(_hostingEnvironment.WebRootPath, pathImg);
-                if (file.Length > 0)
+                if (file != null)
                 {
                     if (!Directory.Exists(uploads))
                     {
@@ -53,6 +53,7 @@ namespace CompanyWeb.Areas.Admin.Controllers
                 item.Name = f["name"].ToString();
                 item.Code = f["code"].ToString();
                 item.History = f["lsht"].ToString();
+                item.Address = f["address"].ToString();
                 item.ValueAndMission = f["gtsm"].ToString();
                 item.Recruitment_condition = f["utql"].ToString();
                 item.Recruitment_procedure = f["utqt"].ToString();

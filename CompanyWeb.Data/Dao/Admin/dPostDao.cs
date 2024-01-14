@@ -50,7 +50,7 @@ namespace CompanyWeb.Data.Dao.Admin
             {
                 item.Title = res.Title;
                 item.ID_CPost = res.ID_CPost;
-                if (res.Image != null)
+                if (res.Image != "\\")
                 {
                     item.Image = res.Image;
                 }

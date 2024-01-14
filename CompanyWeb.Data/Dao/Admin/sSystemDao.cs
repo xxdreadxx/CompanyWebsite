@@ -45,7 +45,7 @@ namespace CompanyWeb.Data.Dao.Admin
                 item.ValueAndMission = res.ValueAndMission;
                 item.Recruitment_condition = res.Recruitment_condition;
                 item.Recruitment_procedure = res.Recruitment_procedure;
-                if (res.Favicon != null)
+                if (res.Favicon != "\\")
                 {
                     item.Favicon = res.Favicon;
                 }

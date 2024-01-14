@@ -54,7 +54,7 @@ namespace CompanyWeb.Data.Dao.Admin
                 item.Content = res.Content;
                 item.Description = res.Description;
                 item.Status = res.Status;
-                if (res.Image != null)
+                if (res.Image != "\\")
                 {
                     item.Image = res.Image;
                 }
