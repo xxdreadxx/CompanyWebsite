@@ -47,8 +47,8 @@ namespace CompanyWeb.Areas.Admin.Controllers
             string mess = "";
             dQnA item = new dQnA();
             item.ID = int.Parse(f["ID"].ToString());
-            item.Question = f["Title"].ToString();
-            item.Answer = f["Content"].ToString();
+            item.Question = f["Question"].ToString();
+            item.Answer = f["Answer"].ToString();
             item.Status = 1;
             //FileDetails fileDetails;
             //using (var reader = new StreamReader(file.OpenReadStream()))

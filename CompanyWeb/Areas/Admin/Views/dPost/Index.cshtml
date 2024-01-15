@@ -268,13 +268,13 @@
 
         function SaveData() {
             var fileI = document.getElementById("f00_Image").files[0];
-            var Name = $('#txtTitle').val();
+            var Title = $('#txtTitle').val();
             var ID = $('#hdID').val();
             var ID_CPost = $('#ddlcPost').val();
             var Description = editor1.getData();
             var Content = editor.getData();
             var status = $('#checkUse').prop("checked") ? 1 : 0;
-            if (Name == '') {
+            if (Title == '') {
                 toastr.error('Chưa nhập tiêu đề!', 'Thông báo', {
                     "positionClass": "toast-top-right",
                     timeOut: 5000,
