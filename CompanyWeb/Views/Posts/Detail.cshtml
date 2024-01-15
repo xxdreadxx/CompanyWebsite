@@ -56,9 +56,20 @@
 
                             <i class="bi bi-tags"></i>
                             <ul class="tags">
-                                <li><a href="#">Kiến thức</a></li>
-                                <li><a href="#">Lời khuyên</a></li>
-                                <li><a href="#">Chia sẻ</a></li>
+                                @if (category.ID == 1 || category.ID == 3)
+                                {
+                                    <li><a href="#">Kiến thức</a></li>
+                                    <li><a href="#">Lời khuyên</a></li>
+                                    <li><a href="#">Chia sẻ</a></li>
+                                }
+                                else if (category.ID == 2)
+                                {
+                                    <li><a href="#">Hướng dẫn sử dụng</a></li>
+                                }
+                                else if (category.ID == 4 || category.ID == 5)
+                                {
+                                    <li><a href="#">Tin tức</a></li>
+                                }
                             </ul>
                         </div><!-- End meta bottom -->
 
@@ -91,7 +102,7 @@
                             <ul class="mt-3">
                                 @foreach (var item in ViewBag.categoryPosts)
                                 {
-                                    <li><a href="/Posts/Index/@item.ID">@item.Title <span>(@lstAllPost.Where(x=>x.ID_CPost == item.ID).Count()</span></a></li>
+                                    <li><a href="/Posts/Index/@item.ID">@item.Title <span>(@lstAllPost.Where(x=>x.ID_CPost == item.ID).Count())</span></a></li>
                                 }
                             </ul>
                         </div><!-- End sidebar categories-->
@@ -103,7 +114,7 @@
                                 @foreach (var item in lstRecentPosts)
                                 {
                                     <div class="post-item mt-3">
-                                        <img src="@item.Thumbnail" alt="@item.Title">
+                                        <img src="@item.Image" alt="@item.Title">
                                         <div>
                                             <h4><a href="/Posts/Detail/@item.ID">@item.Title</a></h4>
                                             <time datetime="@item.CreatedDate.Value.ToString("dd/MM/yyyy")">@item.CreatedDate.Value.ToString("dd/MM/yyyy")</time>
