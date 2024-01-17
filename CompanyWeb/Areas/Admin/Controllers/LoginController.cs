@@ -3,6 +3,7 @@ using CompanyWeb.Data;
 using CompanyWeb.Data.Dao;
 using CompanyWeb.Data.Dao.Admin;
 using CompanyWeb.Data.EF;
+using Microsoft.AspNetCore.Http;
 
 namespace CompanyWeb.Areas.Admin.Controllers
 {
@@ -10,9 +11,12 @@ namespace CompanyWeb.Areas.Admin.Controllers
     public class LoginController : Controller
     {
         private readonly CompanyDbContext _context;
-        public LoginController(CompanyDbContext context)
+        private readonly IHttpContextAccessor contxt;
+
+        public LoginController(CompanyDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            contxt = httpContextAccessor;
         }
 
         //Đéo hiểu sao đoạn này ko chạy đc
@@ -38,7 +42,9 @@ namespace CompanyWeb.Areas.Admin.Controllers
             {
                 mess = "Đăng nhập thành công!";
             }
-
+            //Session["UserID"] = IDUser;
+            contxt.HttpContext.Session.SetInt32("UserID", IDUser);
+            contxt.HttpContext.Session.SetString("UserName", username);
             var data = new { status = status, mess = mess };
 
             var result = new JsonResult(data);

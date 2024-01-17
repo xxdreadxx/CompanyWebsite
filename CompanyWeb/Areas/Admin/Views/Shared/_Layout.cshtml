@@ -1,4 +1,6 @@
-﻿﻿
+﻿@page
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor contxt;
 <!DOCTYPE html>
 
 <html>
@@ -205,7 +207,7 @@
                     </li>
                     <li class="header-icon dib chat-sidebar-icon"><i class="ti-comments"></i></li>
                     <li class="header-icon dib">
-                        <img class="avatar-img" src="~/tempadmin/assets/images/avatar/1.jpg" alt="" /> <span class="user-avatar">Jane <i class="ti-angle-down f-s-10"></i></span>
+                        <img class="avatar-img" src="~/tempadmin/assets/images/avatar/1.jpg" alt="" /> <span class="user-avatar">@contxt.HttpContext.Session.GetString("UserName") <i class="ti-angle-down f-s-10"></i></span>
                         <div class="drop-down dropdown-profile">
                             <div class="dropdown-content-heading">
                                 <span class="text-left">Upgrade Now</span>

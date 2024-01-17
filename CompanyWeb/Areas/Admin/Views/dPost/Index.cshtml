@@ -128,7 +128,6 @@
 @section Scripts {
     <script>
         let editor;
-        let editor1;
         ClassicEditor.create(document.querySelector('#txtContent'), {
             plugins: ['Essentials',
                 'Paragraph',
@@ -168,45 +167,6 @@
             .catch(error => {
                 console.error(error);
             });
-        ClassicEditor.create(document.querySelector('#txtDescription'), {
-            plugins: ['Essentials',
-                'Paragraph',
-                'Heading',
-                'Bold',
-                'Italic',
-                'Underline',
-                'Strikethrough',
-                'SourceEditing',
-                'Subscript',
-                'Superscript',
-                'Alignment',
-                'Indent',
-                'IndentBlock',
-                'BlockQuote',
-                'Link',
-                'Image',
-                'ImageCaption',
-                'ImageStyle',
-                'ImageToolbar',
-                'ImageUpload',
-                'List',
-                'MediaEmbed',
-                'PasteFromOffice',
-                'Table',
-                'TableToolbar',
-                'TableProperties',
-                'TableCellProperties',
-                'Highlight',
-                'FontFamily',
-                'FontSize',
-                'FontColor',
-                'FontBackgroundColor', 'GeneralHtmlSupport', /* ... */]
-        }).then(newEditor => {
-            editor1 = newEditor;
-        })
-            .catch(error => {
-                console.error(error);
-            });
     </script>
     <script>
         function changeIMG() {
@@ -225,7 +185,7 @@
             $('#mdAoEItem').modal('show');
             $('#txtTitle').val('');
             editor.setData('');
-            editor1.setData('');
+            $('#txtDescription').val('');
             $("#ddlcPost").val($("#ddlcPost option:first").val());
             $('#hdID').val('0');
             $('#checkUse').prop('checked', true);
@@ -246,7 +206,7 @@
                     if (res.status == true) {
                         $('#txtTitle').val(res.data1.title);
                         editor.setData(res.data1.content);
-                        editor.setData(res.data1.description);
+                        $('#txtDescription').val(res.data1.description);
                         $('#hdID').val(ID);
                         $('#imgAvatar').attr("src", res.data1.image);
                         $("#ddlcPost").val(res.data1.iD_CPost).change();
@@ -271,7 +231,7 @@
             var Title = $('#txtTitle').val();
             var ID = $('#hdID').val();
             var ID_CPost = $('#ddlcPost').val();
-            var Description = editor1.getData();
+            var Description = $('#txtDescription').val();
             var Content = editor.getData();
             var status = $('#checkUse').prop("checked") ? 1 : 0;
             if (Title == '') {

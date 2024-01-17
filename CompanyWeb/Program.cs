@@ -12,6 +12,12 @@ builder.Services.AddDbContext<CompanyDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("CompanyDb"));
 });
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(option =>
+{
+    option.IdleTimeout = TimeSpan.FromMinutes(60);
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,6 +30,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 //app.UseMvcWithDefaultRoute();
