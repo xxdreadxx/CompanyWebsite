@@ -1,6 +1,11 @@
-﻿@page
-@using Microsoft.AspNetCore.Http
-@inject IHttpContextAccessor contxt;
+﻿@*@page
+@inject IHttpContextAccessor contxt;*@
+@using Microsoft.AspNetCore.Http;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    string userName = HttpContextAccessor.HttpContext.Session.GetString("UserName");
+}
 <!DOCTYPE html>
 
 <html>
@@ -207,7 +212,7 @@
                     </li>
                     <li class="header-icon dib chat-sidebar-icon"><i class="ti-comments"></i></li>
                     <li class="header-icon dib">
-                        <img class="avatar-img" src="~/tempadmin/assets/images/avatar/1.jpg" alt="" /> <span class="user-avatar">@contxt.HttpContext.Session.GetString("UserName") <i class="ti-angle-down f-s-10"></i></span>
+                        <img class="avatar-img" src="~/tempadmin/assets/images/avatar/1.jpg" alt="" /> <span class="user-avatar">@userName <i class="ti-angle-down f-s-10"></i></span>
                         <div class="drop-down dropdown-profile">
                             <div class="dropdown-content-heading">
                                 <span class="text-left">Upgrade Now</span>
