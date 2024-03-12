@@ -97,12 +97,16 @@
                         <div class="card-item">
                             <div class="row">
                                 <div class="col-xl-5">
-                                    <div class="card-bg" style="background-image: url(@prd.Image);"></div>
+                                    <div class="card-bg filter-roomHard">
+                                        <div class="portfolio-content h-100">
+                                            <img src="@prd.Image" class="img-fluid" alt="">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-xl-7 d-flex align-items-center">
                                     <div class="card-body">
                                         <h4 class="card-title">@prd.Title</h4>
-                                        <p>@prd.Description</p>
+                                        <p>@Html.Raw(prd.Description)</p>
                                     </div>
                                 </div>
                             </div>

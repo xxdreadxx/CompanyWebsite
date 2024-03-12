@@ -21,6 +21,25 @@ namespace CompanyWeb.Data.Dao.Admin
             return _context.cCustomers.Where(x => x.Status != 10).ToList();
         }
 
+        public List<cCustomerView> getAllView()
+        {
+            List<cCustomerView> lst = new List<cCustomerView>();
+            List<cCustomer> lstCus = new List<cCustomer>();
+            lstCus = _context.cCustomers.Where(x => x.Status != 10).ToList();
+            foreach (var item in lstCus)
+            {
+                cCustomerView itemView = new cCustomerView();
+                int count = _context.dCustomers.Where(x => x.ID_CCustomer == item.ID && x.Status != 10).ToList().Count;
+                itemView.ID = item.ID;
+                itemView.Status = item.Status;
+                itemView.MetaTitle = item.MetaTitle;
+                itemView.Title = item.Title;
+                itemView.Count = count;
+                lst.Add(itemView);
+            }
+            return lst;
+        }
+
         public cCustomer getDetail(int ID)
         {
             return _context.cCustomers.FirstOrDefault(x => x.ID == ID);

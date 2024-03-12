@@ -20,6 +20,24 @@ namespace CompanyWeb.Data.Dao.Admin
         {
             return _context.cPosts.Where(x => x.Status != 10).ToList();
         }
+        public List<cPostView> getAllView()
+        {
+            List<cPostView> lst = new List<cPostView>();
+            List<cPost> lstCus = new List<cPost>();
+            lstCus = _context.cPosts.Where(x => x.Status != 10).ToList();
+            foreach (var item in lstCus)
+            {
+                cPostView itemView = new cPostView();
+                int count = _context.dPosts.Where(x => x.ID_CPost == item.ID && x.Status != 10).ToList().Count;
+                itemView.ID = item.ID;
+                itemView.Status = item.Status;
+                itemView.MetaTitle = item.MetaTitle;
+                itemView.Title = item.Title;
+                itemView.Count = count;
+                lst.Add(itemView);
+            }
+            return lst;
+        }
 
         public cPost getDetail(int ID)
         {

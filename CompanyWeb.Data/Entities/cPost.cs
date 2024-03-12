@@ -13,4 +13,7 @@ namespace CompanyWeb.Data.Entities
         public string? MetaTitle { get; set; }
         public byte Status { get; set; }
     }
+    public class cPostView:cPost { 
+        public int? Count { get; set; }
+    }
 }

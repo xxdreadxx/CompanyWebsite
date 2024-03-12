@@ -42,7 +42,6 @@ namespace CompanyWeb.Areas.Admin.Controllers
             {
                 mess = "Đăng nhập thành công!";
             }
-            //Session["UserID"] = IDUser;
             contxt.HttpContext.Session.SetInt32("UserID", IDUser);
             contxt.HttpContext.Session.SetString("UserName", username);
             var data = new { status = status, mess = mess };

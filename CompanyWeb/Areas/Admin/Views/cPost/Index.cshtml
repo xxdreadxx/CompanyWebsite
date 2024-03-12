@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    List<cPost> lstData = ViewBag.lstData;
+    List<cPostView> lstData = ViewBag.lstData;
     int i = 0;
 }
 <style>
@@ -22,9 +22,10 @@
         <table class="table table-responsive table-striped">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Tên phân loại</th>
-                    <th>Trạng thái hiển thị</th>
+                    <th style="text-align: center">#</th>
+                    <th style="text-align: center">Tên phân loại</th>
+                    <th style="text-align: center">Số lượng bài viết</th>
+                    <th style="text-align: center">Trạng thái hiển thị</th>
                     <th></th>
                 </tr>
             </thead>
@@ -35,13 +36,14 @@
                     <tr>
                         <th scope="row">@i</th>
                         <td>@item.Title</td>
+                        <td style="text-align: center">@item.Count</td>
                         @if (item.Status == 1)
                         {
-                            <td><span class="badge badge-primary">Đang sử dụng</span></td>
+                            <td style="text-align: center"><span class="badge badge-primary">Đang sử dụng</span></td>
                         }
                         else
                         {
-                            <td><span class="badge badge-default">Dừng sử dụng</span></td>
+                            <td style="text-align: center"><span class="badge badge-default">Dừng sử dụng</span></td>
                         }
                         <td class="color-primary">
                             <a class="badge label-default" onclick="EditItem(@item.ID)"><i class="ti-pencil-alt2"></i></a> &nbsp;

@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    List<cCustomer> lstData = ViewBag.lstData;
+    List<cCustomerView> lstData = ViewBag.lstData;
     int i = 0;
 }
 
@@ -14,26 +14,28 @@
         <table class="table table-responsive table-striped">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Tên phân loại</th>
-                    <th>Trạng thái hiển thị</th>
+                    <th style="text-align: center">#</th>
+                    <th style="text-align: center">Tên phân loại</th>
+                    <th style="text-align: center">Số lượng đơn vị</th>
+                    <th style="text-align: center">Trạng thái hiển thị</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach(var item in lstData)
+                @foreach (var item in lstData)
                 {
                     i++;
                     <tr>
-                        <th scope="row">@i</th>
+                        <th scope="row" style="text-align: center">@i</th>
                         <td>@item.Title</td>
+                        <td style="text-align: center">@item.Count</td>
                         @if (item.Status == 1)
                         {
-                            <td><span class="badge badge-primary">Đang sử dụng</span></td>
+                            <td style="text-align: center"><span class="badge badge-primary">Đang sử dụng</span></td>
                         }
                         else
                         {
-                            <td><span class="badge badge-default">Dừng sử dụng</span></td>
+                            <td style="text-align: center"><span class="badge badge-default">Dừng sử dụng</span></td>
                         }
                         <td class="color-primary"><a class="badge label-danger" onclick="DelItem(@item.ID)"><i class="ti-trash"></i></a></td>
                     </tr>

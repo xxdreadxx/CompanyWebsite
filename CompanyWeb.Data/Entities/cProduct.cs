@@ -14,4 +14,7 @@ namespace CompanyWeb.Data.Entities
         public string? Image { get; set; }
         public byte? Status { get; set; }
     }
+    public class cProductView:cProduct {
+        public int? Count { get; set; }
+    }
 }
